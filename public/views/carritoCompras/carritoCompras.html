@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Carrito De Compras</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../assets/css/custom.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black p-5">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../../views/home/home.html">
+        <img src="../../assets/imgs/logo.jpg" alt="Logo" width="100" height="100"
+          class="d-inline-block align-text-top" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <!-- Productos -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+              PRODUCTOS
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../views/torso/torso.html">TORSO</a></li>
+              <li>
+                <hr>
+              </li>
+              <li><a class="dropdown-item" href="../../views/camisas/camisas.html">CAMISAS</a></li>
+              <li>
+                <hr>
+              </li>
+              <li><a class="dropdown-item" href="../Pantalones/pantalones.html">PANTALONES</a></li>
+            </ul>
+          </li>
+
+          <!-- Marcas -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+              MARCAS
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../views/master/master.html">MASTER</a></li>
+              <li>
+                <hr>
+              </li>
+              <li><a class="dropdown-item" href="../../views/shoptop/shoptop.html">SHOPTOP</a></li>
+              <li>
+                <hr>
+              </li>
+              <li><a class="dropdown-item" href="../../views/elegant/elegant.html">ELEGANT</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="../BlogModas/Blog_modas.html">BLOG DE MODAS</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <form class="d-flex search-margin-right" role="search">
+              <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+            </form>
+          </li>
+          <li class="nav-item">
+            <a href="../../views/carritoCompras/carritoCompras.html" class="nav-link">
+              <img src="../../assets/imgs/carrito.png" alt="Carrito" width="50" height="50" />
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="/perfil" class="nav-link d-flex dropdown-toggle active" data-bs-toggle="dropdown">
+              <img src="../../assets/imgs/Login 3.png" alt="Perfil" width="50" height="50" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end perfil-dropdown">
+              <li><a class="dropdown-item" href="../profile/profile.html">PERFIL</a></li>
+              <li>
+                <hr>
+              </li>
+              <li><a id="logoutBtn" class="dropdown-item" href="#">CERRAR SESIÓN</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-content flex-fill">
+    <section class="h-100 bg-light py-5">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col">
+            <div class="card">
+              <div class="card-body p-4">
+                <div class="row">
+
+                  <!-- Columna izquierda -->
+                  <div class="col-lg-7">
+                    <h5 class="mb-3">
+                      <a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Seguir con el pedido</a>
+                    </h5>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <div>
+                        <p class="mb-1">Carrito de pedido</p>
+                        <p class="mb-0">Tienes 0 productos actualmente</p>
+                      </div>
+                      <div>
+                        <div class="dropdown">
+                          <a class="dropdown-toggle text-decoration-none" href="#" role="button"
+                            data-bs-toggle="dropdown">
+                            Ordenar por:
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="precio">Precio</a></li>
+                            <li>
+                              <hr>
+                            </li>
+                            <li><a class="dropdown-item sort-option" href="#" data-sort="producto">Producto</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Aquí se insertan productos con JS -->
+                  </div>
+
+                  <!-- Columna derecha -->
+                  <div class="col-lg-5">
+                    <div class="card bg-light rounded-3">
+                      <div class="card-body">
+                        <h5 class="mb-3">Resumen de tu pedido</h5>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                          <p class="mb-2">Subtotal</p>
+                          <p class="mb-2">$0</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <p class="mb-2">IVA</p>
+                          <p class="mb-2">$0</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                          <p class="mb-2 fw-bold">Total</p>
+                          <p class="mb-2 fw-bold">$0</p>
+                        </div>
+                        <button id="btnPagar" type="button" class="btn btn-dark w-100">
+                            Continuar con el pedido
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="container-fluid mt-4">
+        <div id="productCards" class="row justify-content-center text-center"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white mt-auto py-4">
+    <div class="container">
+      <div class="row text-center align-items-center">
+
+        <!-- Logo y redes -->
+        <div class="col-md-4 mb-3 mb-md-0">
+          <img src="../../assets/imgs/imagen.jpeg" alt="Logo" class="img-fluid logo2 mb-2" style="max-width: 150px;">
+          <h5 class="mb-0">¡SÍGUENOS EN NUESTRAS REDES SOCIALES!</h5>
+        </div>
+
+        <!-- Íconos -->
+        <div class="col-md-4 mb-3 mb-md-0 d-flex justify-content-center gap-3">
+          <img src="../../assets/imgs/tik_tok_logo-removebg-preview.png" alt="TikTok" class="img-fluid"
+            style="max-width: 40px;">
+          <img src="../../assets/imgs/Instagram_logo-removebg-preview.png" alt="Instagram" class="img-fluid"
+            style="max-width: 40px;">
+          <img src="../../assets/imgs/Youtube_portada-removebg-preview.png" alt="YouTube" class="img-fluid"
+            style="max-width: 40px;">
+        </div>
+
+        <!-- Copyright -->
+        <div class="col-md-4">
+          <h5 class="mb-2">CALIDAD & SEGURIDAD</h5>
+          <p class="mb-0">&copy; 2024 New Style</p>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../../assets/js/carrito.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
