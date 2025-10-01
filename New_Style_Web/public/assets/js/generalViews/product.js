@@ -1,3 +1,5 @@
+import { HOST, URL_PRODUCTS, URL_BRAND, URL_COLORS, URL_SIZE, URL_TYPE_PRODUCT, URL_IMAGE } from '../system/system.js';
+
 document.addEventListener("DOMContentLoaded", () => {
     // Inputs y elementos
     const productTableBody = document.querySelector("#productTable tbody");

@@ -1,3 +1,5 @@
+import { HOST, URL_USERS } from '../system/system.js';
+
 // Función para iniciar sesión
 export const loginUser = async (userEmail, userPassword) => {
     try {
@@ -9,7 +11,7 @@ export const loginUser = async (userEmail, userPassword) => {
             User_password: userPassword
         };
 
-        const response = await fetch(URL_GENERAL_VIEW_LOGIN, {
+        const response = await fetch(`${HOST}${URL_USERS}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (result.user.Role_name) {
                 case "Admin":
-                    window.location.href = '../../views/dashboard/dashboard.html';
+                    window.location.href = '/dashboard/dashboard';
                     break;
                 case "Cliente":
-                    window.location.href = '../../views/home/home.html ';
+                    window.location.href = '/generalViews/home';
                     break;
                 default:
                     console.error('Rol desconocido:', result.user.Role_name);

@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.get('/Img', getImages);
-router.get('/Img/:id', getImageById);
-router.post('/Img', uploadFile);
-router.put('/Img/:id', updateImage);
-router.delete('/Img/:id', deleteImage);
+router.get('/img', getImages);
+router.get('/img/:id', getImageById);
+router.post('/img', uploadFile);
+router.put('/img/:id', updateImage);
+router.delete('/img/:id', deleteImage);
 
 export default router;

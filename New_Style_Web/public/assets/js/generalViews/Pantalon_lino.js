@@ -69,7 +69,9 @@
     return card;
     }
 
-    // Carga productos desde API
+    import { HOST, URL_PRODUCTS } from '../system/system.js';
+
+// Función para cargar productos
     async function loadProductCards() {
     try {
         const response = await fetch(HOST + URL_PRODUCTS);
