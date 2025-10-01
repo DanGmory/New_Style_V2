@@ -16,6 +16,6 @@ router.route(`${apiName}/:id`)
 
 
 // Nueva ruta para el inicio de sesión
-router.post('/login', loginUser);
+router.post(`${apiName}/login`, loginUser);
 
 export default router;

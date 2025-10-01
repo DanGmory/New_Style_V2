@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {showModule, showModuleId, addModule, updateModule, deleteModule} from '../controllers/module.Controller.js';
 
 const router = Router();
-const apiName ='/Module';
+const apiName ='/module';
 
 router.route(apiName)
     .get(showModule)
