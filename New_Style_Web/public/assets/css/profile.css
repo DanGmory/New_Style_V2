@@ -1,0 +1,125 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #13171b; /* Fondo oscuro */
+    padding-top: 60px; /* Espacio superior */
+    margin: 0; /* Elimina márgenes predeterminados */
+    display: flex; /* Permite usar flexbox */
+    flex-direction: column; /* Coloca elementos en columna */
+    min-height: 100vh; /* Altura mínima del viewport */
+}
+
+/* Encabezado "Mi Perfil" */
+.cart {
+    width: 100%; 
+    max-width: 550px; 
+    margin: 0 auto; 
+    background-color: #000; 
+    color: #fff; 
+    text-align: center; 
+    padding: 10px 0; 
+    border-radius: 5px 5px 0 0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.cart h2 {
+    font-size: 1.5rem; 
+    margin: 0; 
+}
+
+/* Contenedor del perfil */
+.profile-container {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 550px; /* Ancho máximo responsivo */
+    margin: 0 auto; /* Centra horizontalmente */
+    padding: 20px; /* Espacio interno */
+    background-color: #ffffff; /* Fondo claro */
+    border-radius: 0 0 5px 5px; /* Esquinas redondeadas solo abajo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    flex-grow: 1; /* Expande el formulario para empujar el footer hacia abajo */
+}
+
+/* Etiquetas */
+.col-form-label {
+    font-size: 0.9rem; /* Tamaño de fuente reducido */
+    text-align: right; /* Alinea las etiquetas a la derecha */
+    padding-right: 10px; /* Espacio entre etiquetas y campos */
+}
+
+/* Campos de formulario */
+.form-control {
+    background-color: #212529; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 0.5rem; /* Relleno interno */
+    font-size: 0.9rem; /* Tamaño de fuente reducido */
+    height: 40px; /* Altura fija para todos los campos */
+}
+
+.form-select {
+    background-color: #212529; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 0.5rem; /* Relleno interno */
+    font-size: 0.9rem; /* Tamaño de fuente reducido */
+    height: 40px; /* Altura fija para todos los campos */
+}
+
+/* Botones "Editar/Guardar" */
+.edit-btn {
+    white-space: nowrap; /* Evita que el texto del botón se rompa en varias líneas */
+    padding: 0.375rem 0.75rem; /* Tamaño reducido para los botones */
+    font-size: 0.875rem; /* Tamaño de fuente reducido */
+    width: 100%; /* Ocupa todo el ancho de la columna */
+    min-width: 80px; /* Ancho mínimo para evitar que se expandan demasiado */
+}
+
+/* Footer */
+footer {
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 20px 0; /* Espacio interno superior e inferior */
+}
+
+footer .container {
+    padding: 20px 0; /* Espacio interno superior e inferior */
+}
+
+footer img {
+    max-width: 50px; /* Tamaño máximo de las imágenes de logos */
+    height: auto; /* Mantener proporción de aspecto */
+}
+
+footer .row {
+    align-items: center; /* Alinea verticalmente los elementos */
+}
+
+footer .col-md-4 {
+    text-align: center; /* Centra el contenido en cada columna */
+}
+
+@media (max-width: 768px) {
+    .cart {
+        max-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        font-size: 1.2rem; /* Reduce el tamaño del texto */
+    }
+
+    .profile-container {
+        margin: 0 auto; /* Menor margen inferior en pantallas pequeñas */
+    }
+
+    .col-form-label {
+        font-size: 0.8rem; /* Reduce el tamaño del texto en pantallas pequeñas */
+    }
+
+    .edit-btn {
+        font-size: 0.75rem; /* Reduce el tamaño del texto en pantallas pequeñas */
+        padding: 0.25rem 0.5rem; /* Relleno interno reducido */
+    }
+
+    footer img {
+        max-width: 40px; /* Reduce el tamaño de las imágenes en pantallas pequeñas */
+    }
+}
