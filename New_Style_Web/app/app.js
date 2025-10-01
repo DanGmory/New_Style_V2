@@ -261,7 +261,14 @@ app.get('/views/generalViews/:section/:file', (req, res) => {
 });
 
 
-app.use((req, res, next) => {
+
+// Ruta raíz -> Home
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
+});
+
+app.use((rep, res, nex) => {
+app.use((req, res, nex
     res.status(404).json({
         message: 'Endpoint not found'
     });
