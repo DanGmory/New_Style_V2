@@ -15,11 +15,6 @@ const HOST = '0.0.0.0';
 // Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Ruta raíz
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'views', 'dashboard', 'dashboard.html'));
-});
-
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

@@ -260,6 +260,13 @@ app.get('/views/generalViews/:section/:file', (req, res) => {
 });
 
 
+// Ruta raíz -> Home
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
+});
+
+
+
 app.use((rep, res, nex) => {
     res.status(404).json({
         message: 'Endpoint losses'
