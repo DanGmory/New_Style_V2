@@ -13,7 +13,7 @@ export const showRoleModule = async (req, res) => {
 
 export const showRoleModuleId = async (req, res) => {
     try {
-        const [result] = await connect.query('SELECT * FROM role_module WHERE Role_module_id', [req.params.id]);
+        const [result] = await connect.query('SELECT * FROM role_module WHERE Role_module_id = ?', [req.params.id]);
         if (result.length === 0) return res.status(404).json({ error: "Role module not found"});
         res.status(200).json(result[0]);
     } catch (error) {

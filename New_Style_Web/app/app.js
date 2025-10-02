@@ -17,7 +17,7 @@ import roleRoutes from '../routes/role.Routes.js';
 import roleModuleRoutes from '../routes/roleModule.Routes.js';
 import sizeRoutes from '../routes/size.Routes.js';
 import usersRoutes from '../routes/users.Routes.js';
-import userApiRoutes from '../routes/apiUser.routes.js';
+import userApiRoutes from '../routes/apiUser.Routes.js';
 import imgRoutes from '../routes/img.Routes.js';
 import codigeRoutes from '../routes/codige.Routes.js';
 import typeProductRoutes from '../routes/typeProduct.Routes.js';
@@ -32,8 +32,6 @@ app.use(express.static(publicPath));
 
 
 app.use(cors());
-
-app.use(express.json());
 
 app.use(express.json());
 
@@ -207,6 +205,7 @@ app.get('/generalViews/Visitor', (req, res) => {
 app.get('/views/dashboard/:section/:file', (req, res) => {
     const section = req.params.section;
     if (section === 'address') return res.redirect('/dashboard/address');
+    if (section === 'addressProfile') return res.redirect('/dashboard/addressProfile');
     if (section === 'brand') return res.redirect('/dashboard/brand');
     if (section === 'codige') return res.redirect('/dashboard/codige');
     if (section === 'colors') return res.redirect('/dashboard/colors');
@@ -218,12 +217,14 @@ app.get('/views/dashboard/:section/:file', (req, res) => {
     if (section === 'product') return res.redirect('/dashboard/product');
     if (section === 'profile') return res.redirect('/dashboard/profile');
     if (section === 'role') return res.redirect('/dashboard/role');
+    if (section === 'roleModule') return res.redirect('/dashboard/roleModule');
     if (section === 'size') return res.redirect('/dashboard/size');
     if (section === 'stateOrder') return res.redirect('/dashboard/stateOrder');
     if (section === 'stateUser') return res.redirect('/dashboard/stateUser');
     if (section === 'typeDocument') return res.redirect('/dashboard/typeDocument');
     if (section === 'typeProduct') return res.redirect('/dashboard/typeProduct');
     if (section === 'users') return res.redirect('/dashboard/users');
+    if (section === 'apiUser') return res.redirect('/dashboard/apiUser');
     
     res.status(404).send('Not found');
 });
@@ -260,19 +261,17 @@ app.get('/views/generalViews/:section/:file', (req, res) => {
 });
 
 
+
 // Ruta raíz -> Home
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
 });
 
-
-
 app.use((rep, res, nex) => {
     res.status(404).json({
-        message: 'Endpoint losses'
+        message: 'Endpoint not found'
     });
 });
 
 export default app;
-
 

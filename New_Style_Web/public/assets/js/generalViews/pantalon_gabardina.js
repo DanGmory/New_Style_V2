@@ -1,3 +1,5 @@
+import { HOST, URL_PRODUCTS } from '../system/system.js';
+
     // Verifica si el usuario está logueado
     function isLoggedIn() {
     const token = localStorage.getItem("authToken");
