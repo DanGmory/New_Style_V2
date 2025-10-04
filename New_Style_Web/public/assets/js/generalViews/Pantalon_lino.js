@@ -69,7 +69,7 @@
     return card;
     }
 
-    import { HOST, URL_PRODUCTS } from '../system/system.js';
+    // Usa HOST y URL_PRODUCTS expuestos globalmente por system.js
 
 // Función para cargar productos
     async function loadProductCards() {

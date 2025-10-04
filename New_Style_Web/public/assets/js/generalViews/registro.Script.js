@@ -1,4 +1,4 @@
-import { HOST, URL_USERS } from '../system/system.js';
+// Usa HOST y URL_USERS expuestos globalmente por system.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('register-form');

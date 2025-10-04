@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userFkInput = document.getElementById("userFk"); // Select para usuarios
     const imageFkInput = document.getElementById("imageFk"); // Select para imágenes
     const typeDocumentFkInput = document.getElementById("typeDocumentFk"); // Select para tipos de documento
+    const addressFkInput = document.getElementById("addressFk"); // Select para direcciones
 
 
         async function loadProfiles() {
@@ -21,17 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) throw new Error("Error al obtener perfiles");
             const profiles = await response.json();
             profileTableBody.innerHTML = "";
-            profiles.forEach(profile => {
+            profiles.forEach(p => {
+                const imageCell = p.Image_url ? `<img src="${p.Image_url}" alt="img" style="width:40px;height:40px;object-fit:cover;border-radius:4px;"/>` : '';
                 profileTableBody.insertAdjacentHTML("beforeend", `
                     <tr>
-                        <td>${profile.Profile_id}</td>
-                        <td>${profile.Profile_name} ${profile.Profile_lastname}</td>
-                        <td>${profile.User_mail}</td>
-                        <td>${profile.Role_name}</td>
+                        <td>${p.Profile_id}</td>
+                        <td>${p.Profile_name}</td>
+                        <td>${p.Profile_lastname ?? ''}</td>
+                        <td>${p.User_mail ?? ''}</td>
+                        <td>${p.Type_document_name ?? ''}</td>
+                        <td>${p.Profile_number_document ?? ''}</td>
+                        <td>${p.Profile_phone ?? ''}</td>
+                        <td>${imageCell}</td>
                         <td>
-                            <button class="action-btn btn-show" data-id="${profile.Profile_id}"><i class="fas fa-eye"></i></button>
-                            <button class="action-btn btn-edit" data-id="${profile.Profile_id}" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-edit"></i></button>
-                            <button class="action-btn btn-delete" data-id="${profile.Profile_id}"><i class="fas fa-trash"></i></button>
+                            <button class="action-btn btn-show" data-id="${p.Profile_id}"><i class="fas fa-eye"></i></button>
+                            <button class="action-btn btn-edit" data-id="${p.Profile_id}" data-bs-toggle="modal" data-bs-target="#profileModal"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn btn-delete" data-id="${p.Profile_id}"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 `);
@@ -60,7 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         profileNumberDocumentInput.value = "";
         userFkInput.value = "";
         imageFkInput.value = "";
-        typeDocumentFkInput.value = "";
+    typeDocumentFkInput.value = "";
+    if (addressFkInput) addressFkInput.value = "";
     });
 
     // Guardar (crear o actualizar) un perfil
@@ -77,11 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
             Profile_number_document: profileNumberDocumentInput.value.trim(),
             User_fk: userFkInput.value,
             image_fk: imageFkInput.value || null, // Se envía null si el campo está vacío
-            Type_document_fk: typeDocumentFkInput.value
+            Type_document_fk: typeDocumentFkInput.value,
+            Address_fk: addressFkInput ? (addressFkInput.value || null) : null // Se envía null si el campo no existe o está vacío
         };
         
         // Validación básica
-        if (!data.Profile_name || !data.User_fk || !data.Type_document_fk) {
+        if (!data.Profile_name || !data.User_fk || !data.Type_document_fk || (addressFkInput && !data.Address_fk)) {
             alert("Por favor, completa los campos obligatorios.");
             return;
         }
@@ -108,11 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const profile = await response.json();
             alert(`Detalles del Perfil:
 ID: ${profile.Profile_id}
-Nombre: ${profile.Profile_name} ${profile.Profile_lastname}
-Documento: ${profile.Type_document_name} - ${profile.Profile_number_document}
-Teléfono: ${profile.Profile_phone}
-Correo: ${profile.User_mail}
-Rol: ${profile.Role_name}`);
+Nombre: ${profile.Profile_name} ${profile.Profile_lastname ?? ''}
+Correo: ${profile.User_mail ?? ''}
+Documento: ${profile.Type_document_name ?? ''} - ${profile.Profile_number_document ?? ''}
+Teléfono: ${profile.Profile_phone ?? ''}`);
         } catch (error) {
             alert("Error al cargar el perfil: " + error.message);
         }
@@ -133,6 +140,7 @@ Rol: ${profile.Role_name}`);
             userFkInput.value = profile.User_fk;
             imageFkInput.value = profile.image_fk;
             typeDocumentFkInput.value = profile.Type_document_fk;
+            if (addressFkInput) addressFkInput.value = profile.Address_fk;
         } catch (error) {
             alert("Error al cargar el perfil: " + error.message);
         }
@@ -203,6 +211,23 @@ Rol: ${profile.Role_name}`);
             alert("Error al cargar tipos de documento: " + error.message);
         }
     }
+
+    async function loadAddresses() {
+        try {
+            const response = await fetch(HOST + URL_ADDRESS);
+            if (!response.ok) throw new Error("Error al cargar direcciones");
+            const addresses = await response.json();
+            addressFkInput.innerHTML = '<option value="">Selecciona una dirección</option>';
+            addresses.forEach(address => {
+                const option = document.createElement("option");
+                option.value = address.Address_id;
+                option.textContent = `Calle/Numero: ${address.Address_number_street} Barrio: ${address.Address_neighborhood}  Localidad: ${address.Address_locality}  Ciudad: ${address.Address_city}`;
+                addressFkInput.appendChild(option);
+            });
+        } catch (error) {
+            alert("Error al cargar direcciones: " + error.message);
+        }
+    }
     
     // ===================================
     //  Inicialización
@@ -213,4 +238,5 @@ Rol: ${profile.Role_name}`);
     loadUsers();
     loadImages();
     loadTypeDocuments();
+    if (addressFkInput) loadAddresses();
 });

@@ -1,164 +1,136 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const codigeTableBody = document.querySelector("#codigeTable tbody");
-    const codigeModal = document.getElementById("codigeModal");
-    const codigeForm = document.getElementById("codigeForm");
+document.addEventListener('DOMContentLoaded', () => {
+  const tableBody = document.querySelector('#codigeTable tbody');
+  const modalEl = document.getElementById('codigeModal');
+  const modal = modalEl ? new bootstrap.Modal(modalEl) : null;
 
-    const codigeIdInput = document.getElementById("codigeId");
-    const codigeNumberInput = document.getElementById("codigeNumber");
-    const ordersFkInput = document.getElementById("ordersFk");
+  const form = document.getElementById('codigeForm');
+  const inputId = document.getElementById('codigeId');
+  const inputNumber = document.getElementById('codigeNumber');
+  const selectOrder = document.getElementById('ordersFk');
+  const titleEl = document.getElementById('codigeModalLabel');
 
-    // === URLs base ===
-    const URL_CODIGE = "http://localhost:3000/api_v1/codige";
-    const URL_ORDERS = "http://localhost:3000/api_v1/orders";
-
-    // Delegación de eventos para botones
-    codigeTableBody.addEventListener("click", async (e) => {
-        const target = e.target.closest("button");
-        if (!target) return;
-        if (target.classList.contains("btn-show")) await handleShowCodige(target);
-        if (target.classList.contains("btn-edit")) await handleEditCodige(target);
-        if (target.classList.contains("btn-delete")) await handleDeleteCodige(target);
-    });
-
-    // Cargar tabla de codiges
-    async function loadCodiges() {
-        try {
-            const response = await fetch(URL_CODIGE);
-            if (!response.ok) throw new Error("Error al obtener codiges");
-            const codiges = await response.json();
-
-            codigeTableBody.innerHTML = "";
-            codiges.forEach(codige => {
-                codigeTableBody.insertAdjacentHTML("beforeend", `
+  // Load list
+  async function loadCodige() {
+    try {
+      const res = await fetch(HOST + URL_CODIGE);
+      if (!res.ok) throw new Error('No se pudo obtener la lista de códigos');
+      const list = await res.json();
+      tableBody.innerHTML = '';
+      list.forEach(row => {
+        tableBody.insertAdjacentHTML('beforeend', `
           <tr>
-            <td>${codige.Codige_id}</td>
-            <td>${codige.codige_number}</td>
-            <td>${codige.product_name}</td>
-            <td>${codige.product_amount}</td>
-            <td>$${codige.price}</td>
-            <td>${codige.user_name}</td>
-            <td>${codige.company_name}</td>
+            <td>${row.Codige_id}</td>
+            <td>${row.codige_number}</td>
+            <td>${row.product_name}</td>
+            <td>${row.product_amount}</td>
+            <td>${row.price}</td>
+            <td>${row.user_name}</td>
+            <td>${row.company_name}</td>
             <td>
-              <button class="action-btn btn-show" data-id="${codige.Codige_id}"><i class="fas fa-eye"></i></button>
-              <button class="action-btn btn-edit" data-id="${codige.Codige_id}" data-bs-toggle="modal" data-bs-target="#codigeModal"><i class="fas fa-edit"></i></button>
-              <button class="action-btn btn-delete" data-id="${codige.Codige_id}"><i class="fas fa-trash"></i></button>
+              <button class="btn btn-sm btn-warning btn-edit" data-id="${row.Codige_id}"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-sm btn-danger btn-delete" data-id="${row.Codige_id}"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
         `);
-            });
-        } catch (error) {
-            alert("Error al cargar codiges: " + error.message);
-        }
+      });
+    } catch (e) {
+      console.error(e);
+      alert('Error cargando códigos');
+    }
+  }
+
+  // Load orders into select
+  async function loadOrders() {
+    try {
+      const res = await fetch(HOST + URL_ORDERS);
+      if (!res.ok) throw new Error('No se pudieron cargar las órdenes');
+      const list = await res.json();
+      selectOrder.innerHTML = '<option value="" disabled selected>Seleccione una orden</option>';
+      list.forEach(o => {
+        const opt = document.createElement('option');
+        opt.value = o.Orders_id;
+        opt.textContent = `#${o.Orders_id} - ${o.product_name} (${o.product_amount}) - ${o.user_name}`;
+        selectOrder.appendChild(opt);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Reset modal for create
+  document.querySelector('[data-bs-target="#codigeModal"]').addEventListener('click', async () => {
+    titleEl.textContent = 'Agregar Nuevo Código';
+    inputId.value = '';
+    inputNumber.value = '';
+    await loadOrders();
+  });
+
+  // Delegate actions
+  tableBody.addEventListener('click', async (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    const id = btn.getAttribute('data-id');
+
+    if (btn.classList.contains('btn-delete')) {
+      if (!confirm('¿Eliminar este código?')) return;
+      try {
+        const res = await fetch(`${HOST + URL_CODIGE}/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('No se pudo eliminar');
+        loadCodige();
+      } catch (e) {
+        console.error(e);
+        alert('Error eliminando código');
+      }
+      return;
     }
 
-    // Reset modal
-    document.querySelector('[data-bs-target="#codigeModal"]').addEventListener("click", () => {
-        document.getElementById("codigeModalLabel").textContent = "Agregar Nuevo Codige";
-        codigeForm.reset();
-        codigeIdInput.value = "";
-    });
-
-    // Guardar codige
-    codigeForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const codigeId = codigeIdInput.value;
-        const method = codigeId ? "PUT" : "POST";
-        const url = codigeId ? `${URL_CODIGE}/${codigeId}` : URL_CODIGE;
-
-        const data = {
-            Codige_number: codigeNumberInput.value,
-            Orders_fk: ordersFkInput.value
-        };
-
-        try {
-            const response = await fetch(url, {
-                method,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) throw new Error("Error al guardar el codige");
-            bootstrap.Modal.getInstance(codigeModal).hide();
-            loadCodiges();
-        } catch (error) {
-            alert("Error al guardar el codige: " + error.message);
+    if (btn.classList.contains('btn-edit')) {
+      try {
+        const res = await fetch(`${HOST + URL_CODIGE}/${id}`);
+        if (!res.ok) throw new Error('No se pudo obtener el código');
+        const item = await res.json();
+        titleEl.textContent = 'Editar Código';
+        inputId.value = item.Codige_id;
+        inputNumber.value = item.codige_number || item.Codige_number || '';
+        await loadOrders();
+        if (item.orders_fk) {
+          selectOrder.value = String(item.orders_fk);
         }
-    });
-
-    // Mostrar codige
-    async function handleShowCodige(target) {
-        const codigeId = target.getAttribute("data-id");
-        try {
-            const response = await fetch(`${URL_CODIGE}/${codigeId}`);
-            if (!response.ok) throw new Error("Error al obtener el codige");
-            const codige = await response.json();
-            alert(`Detalles del codige:
-        ID: ${codige.Codige_id}
-        Número: ${codige.codige_number}
-        Producto: ${codige.product_name}
-        Cantidad: ${codige.product_amount}
-        Precio: $${codige.price}
-        Usuario: ${codige.user_name}
-        Empresa: ${codige.company_name}`);
-        } catch (error) {
-            alert("Error al cargar el codige: " + error.message);
-        }
+        modal && modal.show();
+      } catch (e) {
+        console.error(e);
+        alert('Error cargando código');
+      }
     }
+  });
 
-    // Editar codige
-    async function handleEditCodige(target) {
-        const codigeId = target.getAttribute("data-id");
-        try {
-            const response = await fetch(`${URL_CODIGE}/${codigeId}`);
-            if (!response.ok) throw new Error("Error al obtener el codige");
-            const codige = await response.json();
-
-            document.getElementById("codigeModalLabel").textContent = "Editar Codige";
-            codigeIdInput.value = codige.Codige_id;
-            codigeNumberInput.value = codige.codige_number;
-
-            // ⚠️ Ajuste: en tu backend no devuelves Orders_fk directamente
-            ordersFkInput.value = codige.Orders_fk || "";
-        } catch (error) {
-            alert("Error al cargar el codige: " + error.message);
-        }
+  // Submit form
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = inputId.value;
+    const number = inputNumber.value.trim();
+    const orderId = parseInt(selectOrder.value, 10);
+    if (!number || Number.isNaN(orderId) || orderId <= 0) {
+      alert('Complete los campos obligatorios');
+      return;
     }
-
-    // Eliminar codige
-    async function handleDeleteCodige(target) {
-        const codigeId = target.getAttribute("data-id");
-        if (!confirm("¿Estás seguro de eliminar este codige?")) return;
-        try {
-            const response = await fetch(`${URL_CODIGE}/${codigeId}`, {
-                method: "DELETE"
-            });
-            if (!response.ok) throw new Error("Error al eliminar el codige");
-            alert("Codige eliminado correctamente.");
-            loadCodiges();
-        } catch (error) {
-            alert("Error al eliminar el codige: " + error.message);
-        }
+    const payload = { Codige_number: number, Orders_fk: orderId };
+    try {
+      const url = id ? `${HOST + URL_CODIGE}/${id}` : HOST + URL_CODIGE;
+      const method = id ? 'PUT' : 'POST';
+      const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (!res.ok) {
+        try { console.error('Respuesta:', await res.json()); } catch {}
+        throw new Error('No se pudo guardar');
+      }
+      modal && modal.hide();
+      loadCodige();
+    } catch (e) {
+      console.error(e);
+      alert('Error guardando');
     }
+  });
 
-    // Cargar órdenes para el select
-    async function loadOrders() {
-        try {
-            const response = await fetch(URL_ORDERS);
-            if (!response.ok) throw new Error("Error al cargar órdenes");
-            const orders = await response.json();
-
-            ordersFkInput.innerHTML = '<option value="">Selecciona una orden</option>';
-            orders.forEach(o => {
-                const option = document.createElement("option");
-                option.value = o.Orders_id;
-                option.textContent = `Orden #${o.Orders_id} - ${o.product_name}`;
-                ordersFkInput.appendChild(option);
-            });
-        } catch (error) {
-            alert("Error cargando órdenes: " + error.message);
-        }
-    }
-
-    // Inicializar
-    loadCodiges();
-    loadOrders();
+  // Init
+  loadCodige();
 });

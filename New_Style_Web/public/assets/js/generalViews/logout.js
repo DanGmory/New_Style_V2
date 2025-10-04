@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) {
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      localStorage.clear();
-      // Cambia esta ruta según tu estructura
-      window.location.href = "../../views/home/home.html";
+  localStorage.clear();
+  // Redirigir a la nueva ruta pública
+  window.location.href = "/generalViews/home";
     });
   }
 });

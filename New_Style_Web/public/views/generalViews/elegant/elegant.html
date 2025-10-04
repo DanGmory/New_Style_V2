@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elegant</title>
-  <link rel="stylesheet" href="../../../assets/css/elegant.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../assets/css/premium-shared.css">
+  <link rel="stylesheet" href="../../../assets/css/elegant.css">
 </head>
 
 <body>
@@ -83,25 +84,19 @@
               <img src="../../../assets/imgs/Login 3.png" alt="Perfil" width="50" height="50" />
             </a>
             <ul class="dropdown-menu" id="sessionMenu">
-              <a class="dropdown-item" href="/generalViews/profile" data-role="profile"
-                style="display: none;">
-                PERFIL
-              </a>
+              <li>
+                <a class="dropdown-item" href="/generalViews/profile" data-role="profile" style="display: none;">PERFIL</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/generalViews/register" data-role="register">REGISTRO</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" href="/generalViews/login" data-role="login">LOGIN</a>
+              </li>
+              <!-- Aquí el JS añadirá CERRAR SESIÓN -->
+            </ul>
           </li>
-          <li>
-            <a class="dropdown-item" href="/generalViews/register" data-role="register">
-              REGISTRO
-            </a>
-          </li>
-          <hr />
-          <li>
-            <a class="dropdown-item" href="/generalViews/login" data-role="login">
-              LOGIN
-            </a>
-          </li>
-          <!-- Aquí el JS añadirá CERRAR SESIÓN -->
-        </ul>
-        </li>
         </ul>
       </div>
     </div>
@@ -124,7 +119,7 @@
 
       <!-- Columna Central: Logo -->
       <div class="col-md-4 mb-4 mb-md-0 d-flex justify-content-center">
-        <img src="../../../assets/imgs/elegantLogo.png" alt="Logo Elegant" class="img-logo-elegant">
+        <img src="../../../assets/imgs/elegantImagenInicio.jpg" alt="Logo Elegant" class="img-logo-elegant">
       </div>
 
       <!-- Columna Derecha: Imagen -->

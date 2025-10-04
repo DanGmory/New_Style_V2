@@ -19,7 +19,7 @@
 <div class="sidebar">
     <h2>Menú</h2>
     <ul>
-        <li><a class="menu-button" href=""><i class="fas fa-home"></i> Inicio</a></li>
+        <li><a class="menu-button" href="/dashboard/dashboard"><i class="fas fa-home"></i> Inicio</a></li>
         <hr>
         <h5>Sección de Usuarios</h5>
         <li><a class="menu-button" href="/dashboard/users"><i class="fas fa-user-shield"></i> Usuarios</a></li>
@@ -35,6 +35,7 @@
         <li><a class="menu-button" href="/dashboard/typeProduct"><i class="fas fa-cube"></i>Tipo Productos</a></li>
         <li><a class="menu-button" href="/dashboard/orders"><i class="fas fa-shopping-cart"></i> Carrito de compras</a></li>
         <li><a class="menu-button" href="/dashboard/stateOrder"><i class="fas fa-truck"></i> Estado Pedido</a></li>
+        <li><a class="menu-button" href="/dashboard/codige"><i class="fas fa-barcode"></i> Codigo</a></li>
 
         <hr>
         <h5>Sección de Configuración</h5>
@@ -147,6 +148,13 @@
               <label for="typeDocumentFk" class="form-label">Tipos de Documento:</label>
               <select class="form-select" id="typeDocumentFk" required>
                 <option value="" disabled selected>Selecciona Tipo de Documento</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="addressFk" class="form-label">Direcciones:</label>
+              <select class="form-select" id="addressFk" required>
+                <option value="" disabled selected>Selecciona una Dirección</option>
               </select>
             </div>
           </div>

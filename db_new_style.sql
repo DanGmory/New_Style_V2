@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2025 a las 04:06:07
+-- Tiempo de generación: 04-10-2025 a las 07:56:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -40,19 +40,7 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`Address_id`, `Address_number_street`, `Address_neighborhood`, `Address_locality`, `Address_city`) VALUES
-(1, 'sdadad', 'sadadsad', 'dsaad', 'dasda');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `address_profile`
---
-
-CREATE TABLE `address_profile` (
-  `Address_profile_id` int(11) NOT NULL,
-  `Address_id_fk` int(11) DEFAULT NULL,
-  `Profile_id_fk` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(3, 'Quinta', 'Patio Bonito', 'Kennedy', 'Bogota');
 
 -- --------------------------------------------------------
 
@@ -99,8 +87,7 @@ CREATE TABLE `brand` (
 INSERT INTO `brand` (`Brand_id`, `Brand_name`) VALUES
 (1, 'Shoptop'),
 (2, 'Elegant'),
-(3, 'Master'),
-(5, 'SENA');
+(6, 'Master');
 
 -- --------------------------------------------------------
 
@@ -140,17 +127,13 @@ CREATE TABLE `color` (
 --
 
 INSERT INTO `color` (`Color_id`, `Color_name`) VALUES
-(1, 'Azul'),
-(2, 'Rojo'),
-(4, 'Verde'),
-(5, 'Beige'),
-(6, 'Marron'),
-(7, 'Vino'),
-(8, 'Negro'),
-(9, 'Gris'),
-(10, 'Blanco'),
-(11, 'Morado'),
-(12, 'Rosa');
+(13, 'Azul'),
+(14, 'Rosa'),
+(15, 'Morado'),
+(16, 'Negro'),
+(17, 'Blanco'),
+(18, 'Beige'),
+(19, 'Marron');
 
 -- --------------------------------------------------------
 
@@ -172,9 +155,7 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`Company_id`, `Company_name`, `Company_Address`, `Company_phone`, `Company_mail`) VALUES
 (3, 'Elegant', 'Calle100, Bucaramanga, Colombia', '3135855847', 'elegant@gmail.com'),
-(4, 'Master', 'Calle12, Medellin, Colombia', '3135855789', 'master@gmail.com'),
-(5, 'hipster', 'cll12 no 65-25', '3215698787', 'jose12@gmail.com'),
-(6, '123', '123', '132', '132@gmail.com');
+(4, 'Master', 'Calle12, Medellin, Colombia', '3135855789', 'master@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -193,32 +174,19 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`Image_id`, `Image_name`, `Image_url`) VALUES
-(5, 'Gabán Marron', '/public/assets/imgs/file-1752345238390-890141172.png'),
-(9, 'Gabán Azul Casual', '/public/assets/imgs/file-1752345253348-194217967.jpg'),
-(10, 'Gabán Beige Elegante', '/public/assets/imgs/file-1752345278324-253536173.png'),
-(12, 'Gaban negro Clasico', '/public/assets/imgs/file-1752345291953-343695301.png'),
-(13, 'Gabán Gris', '/public/assets/imgs/file-1752345302756-487276008.png'),
-(14, 'Gabán Vino', '/public/assets/imgs/file-1752345366066-291584180.png'),
-(15, 'Blazer Marron', '/public/assets/imgs/file-1752345390459-56107428.png'),
-(16, 'Blazer Negro', '/public/assets/imgs/file-1752345409664-92542091.png'),
-(17, 'Blazer azul', '/public/assets/imgs/file-1752345509608-292140403.png'),
-(18, 'Blazer vino', '/public/assets/imgs/file-1752345536446-802643366.png'),
-(19, 'Blazer Beige', '/public/assets/imgs/file-1752345550971-222038477.png'),
-(20, 'Abrigo formal azul', '/public/assets/imgs/file-1752345722597-59766409.jpg'),
-(21, 'Abrigo formal beige', '/public/assets/imgs/file-1752345737193-584703283.jpg'),
-(22, 'Abrigo formal negro', '/public/assets/imgs/file-1752345751031-648256689.jpg'),
-(23, 'Abrigo formal Marron', '/public/assets/imgs/file-1752345761809-814939246.jpg'),
-(24, 'Camisa Alfilerada Rosa', '/public/assets/imgs/file-1752345777563-156721397.jpg'),
-(25, 'Camisa Alfilerada Azul', '/public/assets/imgs/file-1752345786989-682293455.jpg'),
-(26, 'Camisa Alfilerada Blanca', '/public/assets/imgs/file-1752345803422-341400602.jpg'),
-(27, 'Camisa Alfilerada Morada', '/public/assets/imgs/file-1752345813964-371874768.jpg'),
-(28, 'Americana negra', '/public/assets/imgs/file-1752345828245-811142538.png'),
-(29, 'Americana Roja', '/public/assets/imgs/file-1752345840601-857446229.jpg'),
-(30, 'Americana azul', '/public/assets/imgs/file-1752345859507-217704074.jpg'),
-(31, 'Americana Marron', '/public/assets/imgs/file-1752345874899-334882584.jpg'),
-(34, 'Pantalo Beige', '/public/assets/imgs/file-1752346065130-946150012.jpg'),
-(35, 'Pantalon negro', '/public/assets/imgs/file-1752346443557-134287300.png'),
-(36, 'pantalon azul', '/public/assets/imgs/file-1752346530837-445847229.png');
+(51, 'Americana azul', '/assets/imgs/file-1759550732128-391742523.png'),
+(52, 'Americana marron', '/assets/imgs/file-1759550789521-238895736.png'),
+(53, 'abrigo azul', '/assets/imgs/file-1759550817859-12326640.png'),
+(54, 'abrigo  negro', '/assets/imgs/file-1759550838137-583751162.png'),
+(55, 'abrigo  marron', '/assets/imgs/file-1759550860450-14003704.png'),
+(56, 'Abrigo beige', '/assets/imgs/file-1759550895242-231092057.png'),
+(57, 'Alfilereada azul', '/assets/imgs/file-1759550924574-475992591.png'),
+(58, 'Alfilereada morada', '/assets/imgs/file-1759550954197-810400194.png'),
+(59, 'Alfilereada rosa', '/assets/imgs/file-1759550970861-938534531.png'),
+(60, 'Alfilereada blanca', '/assets/imgs/file-1759550991550-25004056.png'),
+(61, 'Pantalon gris', '/assets/imgs/file-1759555130786-822910818.png'),
+(63, 'Pantalon Negro', '/assets/imgs/file-1759557275301-470674696.jpg'),
+(64, 'Pantalon negro 2', '/assets/imgs/file-1759557295259-977503722.jpg');
 
 -- --------------------------------------------------------
 
@@ -265,14 +233,6 @@ CREATE TABLE `orders` (
   `State_order_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `orders`
---
-
-INSERT INTO `orders` (`Orders_id`, `Product_fk`, `User_fk`, `State_order_fk`) VALUES
-(1, 17, 25, 2),
-(2, 18, 27, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -299,31 +259,19 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Product_id`, `Product_name`, `Product_amount`, `Product_category`, `Product_description`, `Product_image`, `price`, `Brand_fk`, `Color_fk`, `Size_fk`, `Image_fk`, `Type_product_fk`) VALUES
-(16, 'Blazer beige', 213, 'TORSO', 'Fresco y distinguido', NULL, 230, 1, 5, 10, 19, 10),
-(17, 'Blazer Azul', 131, 'TORSO', 'Clásico y profesional', NULL, 351, 3, 1, 5, 17, 10),
-(18, 'Blazer negro', 132, 'torso', 'Impecable para oficina', NULL, 90, 3, 8, 6, 16, 10),
-(19, 'Gabán Vino Burdeos Formal', 513, 'Torso', 'Color profundo y elegante', NULL, 300, 2, 1, 6, 14, 3),
-(20, 'Gabán Marrón Chocolate', 32, 'torso', 'Calidez con distinción', NULL, 201, 1, 6, 4, 5, 3),
-(21, 'Gabán Gris Oxford', 13, 'TORSO', 'Formal y versátil', NULL, 199, 2, 8, 8, 13, 3),
-(22, 'Gabán Negro Clásico', 321, 'TORSO', 'Ideal para diario', NULL, 179, 3, 8, 9, 12, 3),
-(23, 'Gabán Beige Elegante', 300, 'TORSO', 'Estilo sobrio y moderno', NULL, 205, 1, 5, 5, 10, 3),
-(24, 'Gaban azul', 213, 'TORSO', 'Elegancia en todo clima', NULL, 190, 1, 1, 4, 9, 3),
-(25, 'Blazer vino', 40, 'TORSO', 'Audaz y refinado', NULL, 65, 3, 2, 9, 18, 10),
-(26, 'Abrigo formal Negro', 40, 'TORSO', 'Distinción en cada paso', NULL, 105, 3, 8, 6, 22, 9),
-(27, 'Abrigo formal Azul', 40, 'TORSO', 'Clásico y sobrio', NULL, 205, 3, 1, 5, 20, 9),
-(28, 'Abrigo formal Beige', 40, 'TORSO', 'Estilo cálido atemporal', NULL, 160, 3, 5, 4, 21, 9),
-(29, 'Abrigo formal Marron', 40, 'TORSO', 'Toque moderno sofisticado', NULL, 160, 2, 6, 4, 23, 9),
-(30, 'Camisa Alfilerada Rosa', 60, 'camisas', 'Elegancia fresca diaria', NULL, 85, 1, 12, 6, 24, 6),
-(31, 'Camisa Alfilerada Morada', 40, 'camisas', 'Sutileza con estilo', NULL, 90, 2, 11, 9, 27, 6),
-(32, 'Camisa Alfilerada Blanca', 80, 'camisas', 'Formal y moderna', NULL, 105, 3, 10, 4, 26, 6),
-(33, 'Camisa Alfilerada Azul', 30, 'camisas', 'Toque elegante suave', NULL, 150, 2, 1, 9, 25, 6),
-(34, 'Camisa Americana Negra', 200, 'camisas', 'Toque elegante suave', NULL, 130, 2, 8, 9, 28, 7),
-(35, 'Camisa Americana Roja', 80, 'camisas', 'Estilo fresco sutil', NULL, 130, 1, 2, 6, 29, 7),
-(36, 'Camisa Americana Azul', 40, 'camisas', 'Versátil y sobria', NULL, 180, 2, 1, 9, 30, 7),
-(37, 'Camisa Americana Marron', 65, 'camisas', 'Ligera y profesional', NULL, 180, 2, 6, 4, 31, 7),
-(38, 'Pantalon de Drill', 500, 'pantalon', 'Pantalon casual para el dia a dia', NULL, 60, 3, 8, 5, 35, 2),
-(39, 'Pantalon Gabardina', 500, 'pantalon', 'Pantalon ideal para salir con amigos', NULL, 60, 1, 5, 4, 34, 4),
-(40, 'Pantalon Gabardina', 30, 'pantalon', 'Elegante y casual', NULL, 60, 2, 1, 4, 36, 5);
+(42, 'ABRIGO FORMAL', 2, 'Torso', 'Abrigo de color negro', NULL, 12000, 1, 16, 11, 54, 14),
+(43, 'BLAZER', 3, 'Torso', 'Blazer de color marron', NULL, 14555, 1, 19, 6, 55, 13),
+(44, 'GABAN', 7, 'Torso', 'Gaban de color azul', NULL, 15555, 1, 13, 11, 53, 11),
+(45, 'GABAN', 4, 'Torso', 'Gaban de color Beige', NULL, 20000, 1, 18, 13, 56, 11),
+(46, 'CAMISA', 2, 'camisas', 'Camisa de color marron', NULL, 60000, 2, 19, 6, 52, 15),
+(47, 'CAMISA', 5, 'camisas', 'Camisa de color azul', NULL, 60000, 2, 13, 5, 51, 15),
+(48, 'CAMISA', 7, 'camisas', 'Camisa', NULL, 60000, 2, 13, 6, 57, 17),
+(49, 'CAMISA', 10, 'camisas', 'Camisas de color morado', NULL, 60000, 2, 15, 6, 58, 17),
+(50, 'CAMISA', 16, 'camisas', 'Camisa rosada', NULL, 60000, 6, 14, 6, 59, 16),
+(51, 'CAMISA', 8, 'camisas', 'Camisa de color blanco', NULL, 60000, 6, 17, 6, 60, 16),
+(52, 'PANTALON DRILL', 1, 'pantalon', 'Pantalon gris', NULL, 12312312, 1, 16, 6, 61, 20),
+(53, 'PANTALON LINO', 12, 'pantalon', 'Pantalon de lino negro', NULL, 12312312, 2, 16, 11, 63, 19),
+(54, 'PANTALON GABARDINA', 12, 'pantalon', 'Pantalon de gabardina', NULL, 12312312, 2, 16, 6, 64, 18);
 
 -- --------------------------------------------------------
 
@@ -339,15 +287,9 @@ CREATE TABLE `profile` (
   `Profile_number_document` varchar(10) DEFAULT NULL,
   `User_fk` int(11) DEFAULT NULL,
   `image_fk` int(11) DEFAULT NULL,
-  `Type_document_fk` int(11) DEFAULT NULL
+  `Type_document_fk` int(11) DEFAULT NULL,
+  `Address_fk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `profile`
---
-
-INSERT INTO `profile` (`Profile_id`, `Profile_name`, `Profile_lastname`, `Profile_phone`, `Profile_number_document`, `User_fk`, `image_fk`, `Type_document_fk`) VALUES
-(2, 'pruebaNombre', 'pruebaApellido', 1234567891, '1234567898', 25, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -367,9 +309,7 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`Role_id`, `Role_name`) VALUES
 (19, 'Cliente'),
 (21, 'Admin'),
-(22, 'Bodega'),
-(23, 'Empresa'),
-(24, '123');
+(22, 'Empresa');
 
 -- --------------------------------------------------------
 
@@ -387,33 +327,6 @@ CREATE TABLE `role_module` (
   `Per_delete` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `role_module`
---
-
-INSERT INTO `role_module` (`Role_module_id`, `Role_fk`, `Module_fk`, `Per_show`, `Per_create`, `Per_update`, `Per_delete`) VALUES
-(1, 21, 1, 1, 1, 1, 1),
-(2, 21, 2, 1, 1, 1, 1),
-(3, 21, 3, 1, 1, 1, 1),
-(4, 21, 4, 1, 1, 1, 1),
-(5, 21, 5, 1, 1, 1, 1),
-(7, 19, 5, 1, 0, 0, 0),
-(8, 22, 11, 1, 1, 1, 1),
-(9, 22, 15, 1, 1, 1, 1),
-(10, 22, 14, 1, 1, 1, 1),
-(11, 22, 13, 1, 1, 1, 1),
-(12, 21, 9, 1, 1, 1, 1),
-(13, 21, 10, 1, 1, 1, 1),
-(14, 21, 11, 1, 1, 1, 1),
-(15, 21, 12, 1, 1, 1, 1),
-(16, 21, 13, 1, 1, 1, 1),
-(17, 21, 14, 1, 1, 1, 1),
-(18, 21, 15, 1, 1, 1, 1),
-(19, 23, 1, 1, 1, 1, 1),
-(20, 23, 11, 1, 1, 1, 1),
-(21, 23, 14, 1, 1, 1, 1),
-(22, 23, 15, 1, 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -430,13 +343,11 @@ CREATE TABLE `size` (
 --
 
 INSERT INTO `size` (`Size_id`, `Size_name`) VALUES
-(4, 'M'),
 (5, 'L'),
 (6, 'S'),
-(7, 'XS'),
-(8, 'X'),
-(9, 'XL'),
-(10, 'XXL');
+(11, 'M'),
+(12, 'X'),
+(13, 'XL');
 
 -- --------------------------------------------------------
 
@@ -448,14 +359,6 @@ CREATE TABLE `state_order` (
   `State_order_id` int(11) NOT NULL,
   `State_order_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `state_order`
---
-
-INSERT INTO `state_order` (`State_order_id`, `State_order_name`) VALUES
-(2, 'prueba ESTADO'),
-(3, 'prueba ESTADOs');
 
 -- --------------------------------------------------------
 
@@ -512,15 +415,15 @@ CREATE TABLE `type_product` (
 --
 
 INSERT INTO `type_product` (`Type_product_id`, `Type_product_name`, `Type_product_category`) VALUES
-(2, 'Drill', 'Pantalon'),
-(3, 'GABAN', 'TORSO'),
-(4, 'Gabardina', 'Pantalon'),
-(5, 'Lino', 'Pantalon'),
-(6, 'Alfilerada', 'camisas'),
-(7, 'Americana', 'camisas'),
-(8, 'Pasador', 'camisas'),
-(9, 'ABRIGO FORMAL', 'TORSO'),
-(10, 'blazer', 'torso');
+(11, 'Gaban', 'Torso'),
+(13, 'BLAZER', 'Torso'),
+(14, 'Abrigo Formal', 'Torso'),
+(15, 'Americana', 'camisas'),
+(16, 'PASADOR', 'Torso'),
+(17, 'ALFILERADA', 'Torso'),
+(18, 'Gabardina', 'pantalon'),
+(19, 'LINO', 'pantalon'),
+(20, 'Drill', 'pantalon');
 
 -- --------------------------------------------------------
 
@@ -543,18 +446,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`User_id`, `User_name`, `User_mail`, `User_password`, `Role_fk`, `State_user_fk`, `Company_fk`) VALUES
-(25, 'Daniel', 'diomedesmunozcardenas@gmail.com', '$2b$10$TdixlsN7oz3uTdSCfwRrG.GEvT9Sz2M8ty1ffIK1HzNJ6qWVnEcEu', 21, 1, NULL),
-(27, 'Diego Casallas', 'diego@email.com', '$2b$10$Hv7dxmR2h4MAS7V/K4vfpOQTgFLuLyWHMKPRC/vlme2xEo.3gp2hy', 21, 1, 4),
-(28, 'sebastian', 'sebastian@gmail.com', '$2b$10$di8di7o.lHDkksPiSE0/tORhl.1BlgwJ12uBx.Fl8Yysm4HpZc4Gu', 19, 2, NULL),
-(31, '11111', 'Prueba1@gmail.com', '$2b$10$0nUvBrm3WGIf9aI1Iebw7uwXhv3Ie2WHLQhml1kjjWV/Coj75/OM2', 21, 2, NULL),
-(32, 'Ferney', 'ferney12@email.com', '$2b$10$SpkewbvGlHMoknToZSiaJ.x7D/U4ahbForwXq2zwHrF2MxSaXV76u', 19, 2, NULL),
-(33, 'prueba', 'prueba2@email.com', '$2b$10$kfnhwU031stJ4PyXktjd4.uKkUKa32pX8ppiTRwe7hMX.Bn1gmEty', 19, 2, NULL),
-(35, 'nuevo', 'nuevo@gmail.com', '$2b$10$YPWItZEkNTttV8JYMYhC2.EQfJwVcUynmsrFvQD2tBpawddE5Vqy6', 19, 2, NULL),
-(36, 'Daniel', 'daniel@gmail.com', '$2b$10$YdDoi1voSVRHblKdtjLrh.xU/HLEatiptNvQLWv9lQaj2GdNUMjGu', 19, 2, NULL),
-(37, 'Daniel', 'daniel@gmail.com', '$2b$10$i/F/d78yBf2LNfHPyopjmeDer.qbJCZAkOohM96yXTYMnbQfVRnHK', 19, 2, NULL),
-(38, 'Daniel', 'daniel@gmail.com', '$2b$10$DUBI0RoAuEYaFvEx7iVO5.r0cyIC7GFrEY8zheLhzG0xXkREyUemS', 19, 2, NULL),
-(39, 'danielPrueba', 'danielPrueba@gmail.com', '$2b$10$wucdPqX7FsucslL1owvfu.Eb6COhqk/4zuLLQiEUxyhVL5rGQ9tpq', 19, 2, NULL),
-(41, 'Alejandro12', 'alejandro1221@gmail,com', '$2b$10$OyLyyBedCD8828hhLZxUWu.EoTRs8sbnwq56o/2Rb8L/oTSM05502', 19, 2, NULL);
+(25, 'Daniel', 'diomedesmunozcardenas@gmail.com', '$2b$10$TdixlsN7oz3uTdSCfwRrG.GEvT9Sz2M8ty1ffIK1HzNJ6qWVnEcEu', 21, 1, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -565,14 +457,6 @@ INSERT INTO `users` (`User_id`, `User_name`, `User_mail`, `User_password`, `Role
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`Address_id`);
-
---
--- Indices de la tabla `address_profile`
---
-ALTER TABLE `address_profile`
-  ADD PRIMARY KEY (`Address_profile_id`),
-  ADD KEY `Address_id_fk` (`Address_id_fk`),
-  ADD KEY `Profile_id_fk` (`Profile_id_fk`);
 
 --
 -- Indices de la tabla `api_users`
@@ -655,7 +539,8 @@ ALTER TABLE `profile`
   ADD UNIQUE KEY `Profile_number_document` (`Profile_number_document`),
   ADD UNIQUE KEY `User_id` (`User_fk`),
   ADD KEY `profile_fk_image` (`image_fk`),
-  ADD KEY `Type_document_fk` (`Type_document_fk`);
+  ADD KEY `Type_document_fk` (`Type_document_fk`),
+  ADD KEY `Address_fk` (`Address_fk`);
 
 --
 -- Indices de la tabla `role`
@@ -718,13 +603,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `address`
 --
 ALTER TABLE `address`
-  MODIFY `Address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `address_profile`
---
-ALTER TABLE `address_profile`
-  MODIFY `Address_profile_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `api_users`
@@ -736,7 +615,7 @@ ALTER TABLE `api_users`
 -- AUTO_INCREMENT de la tabla `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `Brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Brand_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `client`
@@ -748,13 +627,13 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT de la tabla `codige`
 --
 ALTER TABLE `codige`
-  MODIFY `Codige_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codige_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `color`
 --
 ALTER TABLE `color`
-  MODIFY `Color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Color_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `company`
@@ -766,7 +645,7 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT de la tabla `images`
 --
 ALTER TABLE `images`
-  MODIFY `Image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `Image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `module`
@@ -778,19 +657,19 @@ ALTER TABLE `module`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Orders_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `Product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `Profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Profile_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `role`
@@ -808,7 +687,7 @@ ALTER TABLE `role_module`
 -- AUTO_INCREMENT de la tabla `size`
 --
 ALTER TABLE `size`
-  MODIFY `Size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `state_order`
@@ -832,24 +711,17 @@ ALTER TABLE `type_document`
 -- AUTO_INCREMENT de la tabla `type_product`
 --
 ALTER TABLE `type_product`
-  MODIFY `Type_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Type_product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `User_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `address_profile`
---
-ALTER TABLE `address_profile`
-  ADD CONSTRAINT `address_profile_ibfk_1` FOREIGN KEY (`Address_id_fk`) REFERENCES `address` (`Address_id`) ON DELETE SET NULL,
-  ADD CONSTRAINT `address_profile_ibfk_2` FOREIGN KEY (`Profile_id_fk`) REFERENCES `profile` (`Profile_id`) ON DELETE SET NULL;
 
 --
 -- Filtros para la tabla `codige`
@@ -880,7 +752,8 @@ ALTER TABLE `product`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_fk_user` FOREIGN KEY (`User_fk`) REFERENCES `users` (`User_id`),
-  ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`Type_document_fk`) REFERENCES `type_document` (`Type_document_id`);
+  ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`Type_document_fk`) REFERENCES `type_document` (`Type_document_id`),
+  ADD CONSTRAINT `profile_ibfk_2` FOREIGN KEY (`Address_fk`) REFERENCES `address` (`Address_id`);
 
 --
 -- Filtros para la tabla `role_module`

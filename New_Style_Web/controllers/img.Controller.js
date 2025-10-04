@@ -53,14 +53,14 @@ export const uploadFile = [
       const customName = req.body.name || req.file.originalname;
       const imageUrl = `/assets/imgs/${req.file.filename}`; // <-- CORRECTO
 
-      await connect.query(
+      const [insert] = await connect.query(
         'INSERT INTO images (Image_name, Image_url) VALUES (?, ?)',
         [customName, imageUrl]
       );
 
       res.status(200).json({
         message: 'File uploaded and saved to DB successfully',
-        file: { name: customName, url: imageUrl }
+        file: { id: insert.insertId, name: customName, url: imageUrl }
       });
     } catch (error) {
       console.error(error);

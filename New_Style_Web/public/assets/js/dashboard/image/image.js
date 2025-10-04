@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
           ${
             img.Image_url.endsWith(".pdf")
               ? `<a href="${imgSrc}" target="_blank"> Ver PDF</a>`
-              : `<img src="${imgSrc}" alt="${img.Image_name}" style="max-height: 80px;" 
-                  onerror="this.onerror=null; this.src='${HOST}/assets/imgs/${img.Image_url};">`
+        : `<img src="${imgSrc}" alt="${img.Image_name}" style="max-height: 80px;" 
+          onerror="this.onerror=null; this.src='${HOST}${img.Image_url}';">`
           }
         </td>
         <td>
@@ -74,8 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Asegurar la barra antes del id y enviar el nombre con la clave esperada por el backend
+    if (imageName) {
+      // Compatibilidad: algunos controladores leen req.body.name
+      formData.append("name", imageName);
+    }
     const url = imageId
-      ? `${HOST}${URL_IMAGE}${imageId}`
+      ? `${HOST}${URL_IMAGE}/${imageId}`
       : `${HOST}${URL_IMAGE}`;
     const method = imageId ? "PUT" : "POST";
 
@@ -97,14 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function handleShowImage(e) {
     const id = e.target.closest("button").getAttribute("data-id");
-    const res = await fetch(`${HOST}${URL_IMAGE}${id}`);
+  const res = await fetch(`${HOST}${URL_IMAGE}/${id}`);
     const img = await res.json();
     alert(`Detalles:\nID: ${img.Image_id}\nNombre: ${img.Image_name}\nRuta: ${img.Image_url}`);
   }
 
   async function handleEditImage(e) {
     const id = e.target.closest("button").getAttribute("data-id");
-    const res = await fetch(`${HOST}${URL_IMAGE}${id}`);
+  const res = await fetch(`${HOST}${URL_IMAGE}/${id}`);
     const img = await res.json();
 
     document.getElementById("imageId").value = img.Image_id;
@@ -117,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function handleDeleteImage(e) {
     const id = e.target.closest("button").getAttribute("data-id");
     if (!confirm("¿Estás seguro de eliminar esta imagen?")) return;
-    const res = await fetch(`${HOST}${URL_IMAGE}${id}`, { method: "DELETE" });
+  const res = await fetch(`${HOST}${URL_IMAGE}/${id}`, { method: "DELETE" });
     if (res.ok) {
       alert("Imagen eliminada correctamente.");
       fetchImages();

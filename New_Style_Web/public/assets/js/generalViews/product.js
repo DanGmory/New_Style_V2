@@ -1,4 +1,4 @@
-import { HOST, URL_PRODUCTS, URL_BRAND, URL_COLORS, URL_SIZE, URL_TYPE_PRODUCT, URL_IMAGE } from '../system/system.js';
+// Usa constantes globales de system.js: HOST, URL_PRODUCTS, URL_BRAND, URL_COLORS, URL_SIZE, URL_TYPE_PRODUCT, URL_IMAGE
 
 document.addEventListener("DOMContentLoaded", () => {
     // Inputs y elementos

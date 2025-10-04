@@ -1,7 +1,6 @@
-import { HOST, URL_USERS } from '../system/system.js';
 
 // Función para iniciar sesión
-export const loginUser = async (userEmail, userPassword) => {
+const loginUser = async (userEmail, userPassword) => {
     try {
         console.log('Iniciando solicitud de inicio de sesión...');
         console.log('Datos enviados:', { userEmail, userPassword });
@@ -38,10 +37,10 @@ export const loginUser = async (userEmail, userPassword) => {
 
         console.log('Inicio de sesión exitoso:', data.user);
 
-        // Guardar token y datos del usuario en localStorage
+    // Guardar token y datos del usuario en localStorage
         localStorage.setItem('authToken', data.token);
-        localStorage.setItem('currentUserId', data.user.User_id);
-        localStorage.setItem('currentUserRole', data.user.Role_name);
+    localStorage.setItem('currentUserId', data.user.User_id);
+    localStorage.setItem('currentUserRole', data.user.Role_name);
         localStorage.setItem('currentUserName', data.user.User_name);
         localStorage.setItem('currentUserEmail', data.user.User_mail);
 
@@ -69,17 +68,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (result.success) {
             console.log('Usuario autenticado:', result.user);
 
-            switch (result.user.Role_name) {
-                case "Admin":
-                    window.location.href = '/dashboard/dashboard';
-                    break;
-                case "Cliente":
-                    window.location.href = '/generalViews/home';
-                    break;
-                default:
-                    console.error('Rol desconocido:', result.user.Role_name);
-                    errorMessageElement.style.display = 'block';
-                    errorMessageElement.textContent = 'Rol de usuario desconocido';
+            const role = String(result.user.Role_name || '').toLowerCase();
+            if (role === 'admin' || role === 'administrador' || role === 'empresa') {
+                window.location.href = '/dashboard/dashboard';
+            } else if (role === 'cliente') {
+                window.location.href = '/generalViews/home';
+            } else {
+                console.error('Rol desconocido:', result.user.Role_name);
+                errorMessageElement.style.display = 'block';
+                errorMessageElement.textContent = 'Rol de usuario desconocido';
             }
         } else {
             console.error('Error de autenticación:', result.message);

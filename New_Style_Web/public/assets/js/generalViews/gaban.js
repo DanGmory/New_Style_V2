@@ -1,4 +1,4 @@
-import { HOST, URL_PRODUCTS } from '../system/system.js';
+// Usa HOST y URL_PRODUCTS expuestos globalmente por system.js (cargado como script clásico)
 
 // Verifica si el usuario está logueado
 function isLoggedIn() {

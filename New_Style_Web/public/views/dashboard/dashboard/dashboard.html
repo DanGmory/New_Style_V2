@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Administrativo</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"  rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.0/css/all.min.css">
@@ -16,67 +17,188 @@
     <link rel="stylesheet" href="../../../assets/css/dashboard.css">
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Popper.js (opcional, si lo usas) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Axios para llamadas AJAX -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>   
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 </head>
+
 <body>
 
     <!-- Menú lateral -->
-<div class="sidebar">
-    <h2>Menú</h2>
-    <ul>
-        <li><a class="menu-button" href=""><i class="fas fa-home"></i> Inicio</a></li>
-        <hr>
-        <h5>Sección de Usuarios</h5>
-        <li><a class="menu-button" href="/dashboard/users"><i class="fas fa-user-shield"></i> Usuarios</a></li>
-        <li><a class="menu-button" href="/dashboard/role"><i class="fas fa-user-cog"></i> Roles</a></li>
-        <li><a class="menu-button" href="/dashboard/company"><i class="fas fa-building"></i> Empresas</a></li>
-        <li><a class="menu-button" href="/dashboard/profile"><i class="fas fa-id-badge"></i> Perfil</a></li>
-        <li><a class="menu-button" href="/dashboard/typeDocument"><i class="fas fa-id-card"></i> Tipos de Documento</a></li>
-        <li><a class="menu-button" href="/dashboard/address"><i class="fas fa-map-marker-alt"></i> Direcciones</a></li>
-        <li><a class="menu-button" href="/dashboard/stateUser"><i class="fas fa-user-check"></i> Estado Usuario</a></li>
-        <hr>
-        <h5>Sección de Productos</h5>
-        <li><a class="menu-button" href="/dashboard/product"><i class="fas fa-box-open"></i> Productos</a></li>
-        <li><a class="menu-button" href="/dashboard/typeProduct"><i class="fas fa-cube"></i>Tipo Productos</a></li>
-        <li><a class="menu-button" href="/dashboard/orders"><i class="fas fa-shopping-cart"></i> Carrito de compras</a></li>
-        <li><a class="menu-button" href="/dashboard/stateOrder"><i class="fas fa-truck"></i> Estado Pedido</a></li>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li><a class="menu-button" href="/dashboard/dashboard"><i class="fas fa-home"></i> Inicio</a></li>
+            <hr>
+            <h5>Sección de Usuarios</h5>
+            <li><a class="menu-button" href="/dashboard/users"><i class="fas fa-user-shield"></i> Usuarios</a></li>
+            <li><a class="menu-button" href="/dashboard/role"><i class="fas fa-user-cog"></i> Roles</a></li>
+            <li><a class="menu-button" href="/dashboard/company"><i class="fas fa-building"></i> Empresas</a></li>
+            <li><a class="menu-button" href="/dashboard/profile"><i class="fas fa-id-badge"></i> Perfil</a></li>
+            <li><a class="menu-button" href="/dashboard/typeDocument"><i class="fas fa-id-card"></i> Tipos de
+                    Documento</a></li>
+            <li><a class="menu-button" href="/dashboard/address"><i class="fas fa-map-marker-alt"></i> Direcciones</a>
+            </li>
+            <li><a class="menu-button" href="/dashboard/stateUser"><i class="fas fa-user-check"></i> Estado Usuario</a>
+            </li>
+            <hr>
+            <h5>Sección de Productos</h5>
+            <li><a class="menu-button" href="/dashboard/product"><i class="fas fa-box-open"></i> Productos</a></li>
+            <li><a class="menu-button" href="/dashboard/typeProduct"><i class="fas fa-cube"></i>Tipo Productos</a></li>
+            <li><a class="menu-button" href="/dashboard/orders"><i class="fas fa-shopping-cart"></i> Carrito de
+                    compras</a></li>
+            <li><a class="menu-button" href="/dashboard/stateOrder"><i class="fas fa-truck"></i> Estado Pedido</a></li>
+            <li><a class="menu-button" href="/dashboard/codige"><i class="fas fa-barcode"></i> Codigo</a></li>
 
-        <hr>
-        <h5>Sección de Configuración</h5>
-        <li><a class="menu-button" href="/dashboard/brand"><i class="fas fa-tag"></i> Marcas</a></li>
-        <li><a class="menu-button" href="/dashboard/size"><i class="fas fa-ruler-combined"></i> Tallas</a></li>
-        <li><a class="menu-button" href="/dashboard/colors"><i class="fas fa-palette"></i> Colores</a></li>
-        <li><a class="menu-button" href="/dashboard/img"><i class="fas fa-image"></i> Imagenes</a></li>
-        <hr>
-    </ul>
-</div>
+            <hr>
+            <h5>Sección de Configuración</h5>
+            <li><a class="menu-button" href="/dashboard/brand"><i class="fas fa-tag"></i> Marcas</a></li>
+            <li><a class="menu-button" href="/dashboard/size"><i class="fas fa-ruler-combined"></i> Tallas</a></li>
+            <li><a class="menu-button" href="/dashboard/colors"><i class="fas fa-palette"></i> Colores</a></li>
+            <li><a class="menu-button" href="/dashboard/img"><i class="fas fa-image"></i> Imagenes</a></li>
+            <hr>
+        </ul>
+    </div>
 
     <!-- Contenido principal -->
     <div class="content">
-        <h1>Bienvenido al Dashboard Administrativo</h1>
-        <!-- Aquí va el contenido principal -->
+        <h1>Bienvenido al Dashboard</h1>
+        <div class="mb-3">
+            <a class="btn btn-outline-primary" href="/generalViews/home">Volver al Home</a>
+        </div>
+
+        <!-- Cards de acceso rápido a módulos -->
+        <div class="dashboard-container">
+            <div class="cards-grid">
+                <div class="dashboard-card"><a href="/dashboard/users">
+                        <div class="icon icon-users"><i class="fas fa-user-shield"></i></div>
+                        <div>
+                            <div class="title">Usuarios</div>
+                            <div class="desc">Gestiona usuarios</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/role">
+                        <div class="icon icon-roles"><i class="fas fa-user-cog"></i></div>
+                        <div>
+                            <div class="title">Roles</div>
+                            <div class="desc">Permisos y roles</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/company">
+                        <div class="icon icon-company"><i class="fas fa-building"></i></div>
+                        <div>
+                            <div class="title">Empresas</div>
+                            <div class="desc">Administración de empresas</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/profile">
+                        <div class="icon icon-profile"><i class="fas fa-id-badge"></i></div>
+                        <div>
+                            <div class="title">Perfil</div>
+                            <div class="desc">Tu información</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/typeDocument">
+                        <div class="icon icon-docs"><i class="fas fa-id-card"></i></div>
+                        <div>
+                            <div class="title">Tipos de Documento</div>
+                            <div class="desc">Configura documentos</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/address">
+                        <div class="icon icon-address"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="title">Direcciones</div>
+                            <div class="desc">Direcciones de envío</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/stateUser">
+                        <div class="icon icon-state-user"><i class="fas fa-user-check"></i></div>
+                        <div>
+                            <div class="title">Estado Usuario</div>
+                            <div class="desc">Estados y validaciones</div>
+                        </div>
+                    </a></div>
+
+                <div class="dashboard-card"><a href="/dashboard/product">
+                        <div class="icon icon-product"><i class="fas fa-box-open"></i></div>
+                        <div>
+                            <div class="title">Productos</div>
+                            <div class="desc">Inventario y catálogo</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/typeProduct">
+                        <div class="icon icon-type-product"><i class="fas fa-cube"></i></div>
+                        <div>
+                            <div class="title">Tipo Productos</div>
+                            <div class="desc">Clasificación de productos</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/orders">
+                        <div class="icon icon-orders"><i class="fas fa-shopping-cart"></i></div>
+                        <div>
+                            <div class="title">Carrito de compras</div>
+                            <div class="desc">Pedidos y compras</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/stateOrder">
+                        <div class="icon icon-state-order"><i class="fas fa-truck"></i></div>
+                        <div>
+                            <div class="title">Estado Pedido</div>
+                            <div class="desc">Seguimiento de pedidos</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/codige">
+                        <div class="icon icon-code"><i class="fas fa-barcode"></i></div>
+                        <div>
+                            <div class="title">Códigos</div>
+                            <div class="desc">Códigos de compra</div>
+                        </div>
+                    </a></div>
+
+                <div class="dashboard-card"><a href="/dashboard/brand">
+                        <div class="icon icon-brand"><i class="fas fa-tag"></i></div>
+                        <div>
+                            <div class="title">Marcas</div>
+                            <div class="desc">Gestión de marcas</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/size">
+                        <div class="icon icon-size"><i class="fas fa-ruler-combined"></i></div>
+                        <div>
+                            <div class="title">Tallas</div>
+                            <div class="desc">Tamaños y medidas</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/colors">
+                        <div class="icon icon-colors"><i class="fas fa-palette"></i></div>
+                        <div>
+                            <div class="title">Colores</div>
+                            <div class="desc">Paletas de color</div>
+                        </div>
+                    </a></div>
+                <div class="dashboard-card"><a href="/dashboard/img">
+                        <div class="icon icon-img"><i class="fas fa-image"></i></div>
+                        <div>
+                            <div class="title">Imágenes</div>
+                            <div class="desc">Galería y recursos</div>
+                        </div>
+                    </a></div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
-    <script src="../../assets/js/role.js"></script>
-    <script src="../../assets/js/dashboard.js"></script>
-    <script src="../../assets/js/brand.js"></script>
-    <script src="../../assets/js/color.js"></script>
-    <script src="../../assets/js/size.js"></script>
-    <script src="../../assets/js/product.js"></script>
-    <script src="../../assets/js/company.js"></script>
-    <script src="../../assets/js/address.js"></script>
-    <script src="../../assets/js/orders.js"></script>
+
 </body>
+
 </html>
