@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Cargar todos los roles
     async function loadRoles() {
         try {
-            const response = await fetch("http://localhost:3000/api_v1/role");
+            const response = await fetch(HOST + URL_ROLE);
             if (!response.ok) throw new Error("Error al obtener roles");
             const roles = await response.json();
 
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const roleId = roleIdInput.value;
             const method = roleId ? "PUT" : "POST";
             const url = roleId 
-                ? `http://localhost:3000/api_v1/role/${roleId}` 
-                : "http://localhost:3000/api_v1/role";
+                ? `${HOST + URL_ROLE}/${roleId}` 
+                : HOST + URL_ROLE;
 
             try {
                 const response = await fetch(url, {
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function handleShowRole(e) {
         const roleId = e.target.closest("button").getAttribute("data-id");
         try {
-            const response = await fetch(`http://localhost:3000/api_v1/role/${roleId}`);
+            const response = await fetch(`${HOST + URL_ROLE}/${roleId}`);
             if (!response.ok) throw new Error("Error al obtener el rol");
             const role = await response.json();
             alert(`Detalles del rol:\nID: ${role.Role_id}\nNombre: ${role.Role_name}`);
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function handleEditRole(e) {
         const roleId = e.target.closest("button").getAttribute("data-id");
         try {
-            const response = await fetch(`http://localhost:3000/api_v1/role/${roleId}`);
+            const response = await fetch(`${HOST + URL_ROLE}/${roleId}`);
             if (!response.ok) throw new Error("Error al obtener el rol");
             const role = await response.json();
             document.getElementById("roleModalLabel").textContent = "Editar Rol";
@@ -114,12 +114,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("¿Estás seguro de eliminar este rol?")) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api_v1/role/${roleId}`, { method: "DELETE" });
-            if (!response.ok) throw new Error("Error al eliminar el rol");
+            const response = await fetch(`${HOST + URL_ROLE}/${roleId}`, { method: "DELETE" });
+            if (!response.ok) {
+                let msg = "Error al eliminar el rol";
+                try {
+                    const data = await response.json();
+                    if (response.status === 409 && data?.error) {
+                        msg = data.error;
+                    } else if (data?.error) {
+                        msg = data.error;
+                    }
+                } catch {}
+                throw new Error(msg);
+            }
             loadRoles();
         } catch (error) {
             console.error("Error al eliminar rol:", error);
-            alert("Error al eliminar el rol: " + error.message);
+            alert(error.message);
         }
     }
 

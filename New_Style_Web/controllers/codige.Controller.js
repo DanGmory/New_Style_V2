@@ -7,10 +7,13 @@ try {
     SELECT
         CO.Codige_id,
         CO.Codige_number AS codige_number,
+        CO.Orders_fk AS orders_fk,
         PD.Product_name AS product_name,
         PD.Product_amount AS product_amount,
         PD.price AS price,
         US.User_name AS user_name,
+        US.User_id AS user_id,
+        US.User_mail AS user_mail,
         CP.Company_name AS company_name
     FROM codige CO
     INNER JOIN orders O ON CO.Orders_fk = O.Orders_id
@@ -32,10 +35,13 @@ try {
     SELECT
         CO.Codige_id,
         CO.Codige_number AS codige_number,
+        CO.Orders_fk AS orders_fk,
         PD.Product_name AS product_name,
         PD.Product_amount AS product_amount,
         PD.price AS price,
         US.User_name AS user_name,
+        US.User_id AS user_id,
+        US.User_mail AS user_mail,
         CP.Company_name AS company_name
     FROM codige CO
     INNER JOIN orders O ON CO.Orders_fk = O.Orders_id

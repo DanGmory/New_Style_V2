@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="../../../assets/css/custom.css">
+  <link rel="stylesheet" href="../../../assets/css/premium-shared.css">
+  <link rel="stylesheet" href="../../../assets/css/carritoCompras.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -113,7 +114,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-4">
                       <div>
                         <p class="mb-1">Carrito de pedido</p>
-                        <p class="mb-0">Tienes 0 productos actualmente</p>
+                        <p id="cartCountText" class="mb-0">Tienes 0 productos actualmente</p>
                       </div>
                       <div>
                         <div class="dropdown">
@@ -132,6 +133,7 @@
                       </div>
                     </div>
                     <!-- Aquí se insertan productos con JS -->
+                    <div id="cartItems" class="vstack gap-3"></div>
                   </div>
 
                   <!-- Columna derecha -->
@@ -142,15 +144,15 @@
                         <hr>
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">Subtotal</p>
-                          <p class="mb-2">$0</p>
+                          <p id="subtotal" class="mb-2">$0</p>
                         </div>
                         <div class="d-flex justify-content-between">
                           <p class="mb-2">IVA</p>
-                          <p class="mb-2">$0</p>
+                          <p id="iva" class="mb-2">$0</p>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                           <p class="mb-2 fw-bold">Total</p>
-                          <p class="mb-2 fw-bold">$0</p>
+                          <p id="total" class="mb-2 fw-bold">$0</p>
                         </div>
                         <button id="btnPagar" type="button" class="btn btn-dark w-100">
                             Continuar con el pedido
@@ -208,10 +210,33 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="../../../assets/js/generalViews/carritoCompras.js"></script>
+  <!-- Modal de códigos generados -->
+  <div class="modal fade" id="purchaseCodesModal" tabindex="-1" aria-labelledby="purchaseCodesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="purchaseCodesLabel">Códigos de Compra</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Guarda estos códigos para consultar tu pedido.</p>
+          <ul id="generatedCodesList" class="list-group"></ul>
+        </div>
+        <div class="modal-footer">
+          <button id="printCodesBtn" type="button" class="btn btn-primary">Imprimir</button>
+          <a href="/generalViews/codige" class="btn btn-outline-primary">Ver mis códigos</a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+  <script src="../../../assets/js/system/system.js"></script>
+  <script src="../../../assets/js/generalViews/session.js"></script>
+  <script src="../../../assets/js/generalViews/carritoCompras.js"></script>
 </body>
 
 </html>

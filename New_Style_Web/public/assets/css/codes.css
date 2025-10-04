@@ -1,0 +1,111 @@
+/* Estilos premium para /generalViews/codige */
+:root{
+  --codes-accent: #c9a86a;
+  --codes-card-bg: rgba(20,20,22,.68);
+  --codes-card-border: rgba(255,255,255,.16);
+  --codes-text: #f3f3f3;
+  --codes-muted: #d1d1d1;
+  --codes-row: rgba(255,255,255,.06);
+  --codes-row-hover: rgba(255,255,255,.1);
+}
+
+/* Contenedor principal */
+.codes-container{ padding-top: 1.5rem; padding-bottom: 2rem; }
+
+/* Tarjeta contenedora */
+.codes-card{
+  background: var(--codes-card-bg);
+  border: 1px solid var(--codes-card-border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
+  color: var(--codes-text);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* Título */
+.codes-title{ font-family: 'Playfair Display', serif; color: #fff; }
+
+/* Tabla */
+/* Tabla estilo "cards" por fila */
+.table.codes-table{
+  color: var(--codes-text);
+  border: none;
+  background: transparent;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* separación entre filas */
+}
+.table.codes-table thead th{
+  background: rgba(255,255,255,.06);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  padding: 14px 16px;
+}
+.table.codes-table tbody tr{ transition: transform .12s ease, filter .12s ease; }
+.table.codes-table tbody tr:hover{ transform: translateY(-1px); }
+.table.codes-table tbody td{
+  background: var(--codes-row);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 12px 16px;
+  vertical-align: middle;
+  color: #ffffff;
+}
+.table.codes-table tbody tr:hover td{ background: var(--codes-row-hover); }
+.table.codes-table tbody td:first-child{ border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+.table.codes-table tbody td:last-child{ border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+.table.codes-table th:last-child, .table.codes-table td:last-child{ text-align: center; white-space: nowrap; }
+
+/* Alert */
+.alert-codes{
+  background: rgba(255,255,255,.06);
+  color: var(--codes-text);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+}
+
+/* Botones */
+.codes-card .btn{ border-radius: 999px; padding: 10px 16px; }
+.codes-card .btn-primary{
+  background: linear-gradient(135deg, #3a2f25, var(--codes-accent));
+  border: 1px solid rgba(255,255,255,.18);
+}
+.codes-card .btn-outline-primary{
+  color: var(--codes-text);
+  border: 1px solid rgba(255,255,255,.25);
+}
+.codes-card .btn-outline-primary:hover{
+  background: rgba(255,255,255,.08);
+  color: var(--codes-text);
+}
+
+/* Modal */
+.modal-content{
+  background: rgba(20,20,22,.92);
+  color: var(--codes-text);
+  border: 1px solid var(--codes-card-border);
+  border-radius: 12px;
+}
+.modal-header, .modal-footer{ border-color: rgba(255,255,255,.12); }
+
+/* Links dentro de la tabla */
+.codes-link{ color: #ffffff; text-decoration: none; }
+.codes-link:hover{ text-decoration: underline; }
+
+/* Enlaces dentro de celdas de tabla forzados a blanco */
+.table.codes-table a{ color: #ffffff; }
+.table.codes-table a:hover{ color: #ffffff; text-decoration: underline; }
+
+/* Acciones dentro de la tabla: botones amigables si existen */
+.codes-table td .btn{ border-radius: 999px; padding: 6px 12px; font-size: .875rem; }
+.codes-table td .btn + .btn{ margin-left: 6px; }
+
+/* Responsivo */
+@media (max-width: 768px){
+  .codes-card{ border-radius: 10px; }
+  .table.codes-table{ border-spacing: 0 8px; }
+  .table.codes-table thead th{ padding: 10px 12px; }
+  .table.codes-table tbody td{ padding: 10px 12px; }
+}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>New Estyle</title>
   <meta charset="utf-8">
@@ -8,12 +9,14 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="../../../assets/css/home.css">
 </head>
+
 <body>
   <!-- Menu arriba -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-black p-5">
     <div class="container-fluid">
       <a class="navbar-brand" href="/generalViews/home">
-        <img src="../../../assets/imgs/logo.jpg" alt="Logo" width="100" height="100" class="d-inline-block align-text-top" />
+        <img src="../../../assets/imgs/logo.jpg" alt="Logo" width="100" height="100"
+          class="d-inline-block align-text-top" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,33 +73,40 @@
           </a>
         </li>
 
-  
+        <!-- Ir al Dashboard (visible solo para Admin/Empresa) -->
+        <li class="nav-item d-none" id="navGoDashboardItem">
+          <a href="/dashboard/dashboard" class="btn btn-warning fw-semibold ms-2">Ir al Dashboard</a>
+        </li>
+
+
         <!-- Menú desplegable de perfil -->
-    <li  class="nav-item dropdown" data-role="profile-dropdown">
-  <a href="#" class="nav-link d-flex dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
-    <img src="../../../assets/imgs/Login 3.png" alt="Perfil" width="50" height="50" />
-  </a>
-        <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item" href="/generalViews/profile" data-role="profile" style="display: none;">
-              PERFIL
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="/generalViews/register" data-role="register">
-              REGISTRO
-            </a>
-          </li>
-          <hr />
-          <li>
-            <a class="dropdown-item" href="/generalViews/login" data-role="login">
-              LOGIN
-            </a>
-          </li>
-          <!-- Aquí el JS añadirá CERRAR SESIÓN -->
-        </ul>
-      </li>
-      
+        <li class="nav-item dropdown" data-role="profile-dropdown">
+          <a href="#" class="nav-link d-flex dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../../../assets/imgs/Login 3.png" alt="Perfil" width="50" height="50" />
+          </a>
+          <ul class="dropdown-menu" id="sessionMenu">
+            <li>
+              <a class="dropdown-item" href="/generalViews/profile" data-role="profile" style="display: none;">
+                PERFIL
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/generalViews/register" data-role="register">
+                REGISTRO
+              </a>
+            </li>
+            <hr />
+            <li>
+
+              <a class="dropdown-item" href="/generalViews/login" data-role="login">
+                LOGIN
+              </a>
+
+            </li>
+            <!-- Aquí el JS añadirá CERRAR SESIÓN -->
+          </ul>
+        </li>
+
       </div>
     </div>
   </nav>
@@ -106,8 +116,7 @@
     <div class="col-sm-4">
       <div class="cover-text">UN HOMBRE DE VERDAD NO MIRA COLOR DE PIEL, SOLO VISTE CON ESTILO</div>
     </div>
-    <input type="button" value="QUIERO CREAR UNA CUENTA"
-      onclick="location.href='/generalViews/register'"
+    <input type="button" value="QUIERO CREAR UNA CUENTA" onclick="location.href='/generalViews/register'"
       class="text-wrap" data-role="create-account">
   </div>
 
@@ -139,7 +148,8 @@
       </div>
       <div class="text col-10 col-md-15">
         <h1 class="fs-4 fs-md-3 fs-lg-2">NUEVA PASARELA DE MODA</h1>
-        <p class="fs-5">Una pasarela de modas elegante es un escenario diseñado para presentar colecciones de moda...</p>
+        <p class="fs-5">Una pasarela de modas elegante es un escenario diseñado para presentar colecciones de moda...
+        </p>
       </div>
     </div>
   </div>
@@ -168,13 +178,16 @@
       </div>
       <div class="col-md-4 d-flex flex-column align-items-center">
         <div class="mb-3">
-          <img src="../../../assets/imgs/tik_tok_logo-removebg-preview.png" alt="TikTok Logo" class="img-fluid" style="max-width: 50px;">
+          <img src="../../../assets/imgs/tik_tok_logo-removebg-preview.png" alt="TikTok Logo" class="img-fluid"
+            style="max-width: 50px;">
         </div>
         <div class="mb-3">
-          <img src="../../../assets/imgs/Instagram_logo-removebg-preview.png" alt="Instagram Logo" class="img-fluid" style="max-width: 50px;">
+          <img src="../../../assets/imgs/Instagram_logo-removebg-preview.png" alt="Instagram Logo" class="img-fluid"
+            style="max-width: 50px;">
         </div>
         <div>
-          <img src="../../../assets/imgs/Youtube_portada-removebg-preview.png" alt="YouTube Logo" class="img-fluid" style="max-width: 50px;">
+          <img src="../../../assets/imgs/Youtube_portada-removebg-preview.png" alt="YouTube Logo" class="img-fluid"
+            style="max-width: 50px;">
         </div>
       </div>
       <div class="col-md-4 d-flex flex-column align-items-end">
@@ -185,9 +198,10 @@
     </div>
   </footer>
 
-  <script src="../../../assets/js/generalViews/logeado.js"></script>
+  <script src="../../../assets/js/generalViews/session.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
+
 </html>

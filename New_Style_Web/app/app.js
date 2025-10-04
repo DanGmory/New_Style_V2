@@ -2,6 +2,8 @@ import cors from 'cors';  // 🔹 Importar CORS
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';    
+import cookieParser from 'cookie-parser';
+import { guardView, allowVisitors } from '../middlewares/viewAccess.js';
 import colorsRoutes from '../routes/colors.Routes.js';
 import addressRoutes from '../routes/Address.Routes.js';
 import addressProfileRoutes from '../routes/AddressProfile.Routes.js';
@@ -34,6 +36,7 @@ app.use(express.static(publicPath));
 app.use(cors());
 
 app.use(express.json());
+app.use(cookieParser());
 
 
 app.use('/api_v1', colorsRoutes);
@@ -59,144 +62,155 @@ app.use('/api_v1', codigeRoutes);
 
 // ...existing code...
 
-app.get('/dashboard/address', (req, res) => {
+// ==== PROTECCIÓN DASHBOARD: Empresas y Administradores ====
+const onlyCompanyAndAdmin = guardView(['Empresa','Admin']);
+
+app.get('/dashboard/address', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/address/address.html'));
 });
-app.get('/dashboard/addressProfile', (req, res) => {
+app.get('/dashboard/addressProfile', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/addressProfile/addressProfile.html'));
 });
-app.get('/dashboard/brand', (req, res) => {
+app.get('/dashboard/brand', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/brand/brand.html'));
 });
-app.get('/dashboard/codige', (req, res) => {
+app.get('/dashboard/codige', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/codige/codige.html'));
 });
-app.get('/dashboard/colors', (req, res) => {
+app.get('/dashboard/colors', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/colors/colors.html'));
 });
-app.get('/dashboard/company', (req, res) => {
+app.get('/dashboard/company', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/company/company.html'));
 });
-app.get('/dashboard/dashboard', (req, res) => {
+app.get('/dashboard/dashboard', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/dashboard/dashboard.html'));
 });
-app.get('/dashboard/img', (req, res) => {
+app.get('/dashboard/img', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/img/img.html'));
 });
-app.get('/dashboard/module', (req, res) => {
+app.get('/dashboard/module', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/module/module.html'));
 });
-app.get('/dashboard/orders', (req, res) => {
+app.get('/dashboard/orders', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/orders/orders.html'));
 });
-app.get('/dashboard/product', (req, res) => {
+app.get('/dashboard/product', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/product/product.html'));
 });
-app.get('/dashboard/profile', (req, res) => {
+app.get('/dashboard/profile', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/profile/profile.html'));
 });
-app.get('/dashboard/role', (req, res) => {
+app.get('/dashboard/role', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/role/role.html'));
 });
-app.get('/dashboard/roleModule', (req, res) => {
+app.get('/dashboard/roleModule', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/roleModule/roleModule.html'));
 });
-app.get('/dashboard/size', (req, res) => {
+app.get('/dashboard/size', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/size/size.html'));
 });
-app.get('/dashboard/stateOrder', (req, res) => {
+app.get('/dashboard/stateOrder', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/stateOrder/stateOrder.html'));
 });
-app.get('/dashboard/stateUser', (req, res) => {
+app.get('/dashboard/stateUser', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/stateUser/stateUser.html'));
 });
-app.get('/dashboard/typeDocument', (req, res) => {
+app.get('/dashboard/typeDocument', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/typeDocument/typeDocument.html'));
 });
-app.get('/dashboard/typeProduct', (req, res) => {
+app.get('/dashboard/typeProduct', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/typeProduct/typeProduct.html'));
 });
-app.get('/dashboard/users', (req, res) => {
+app.get('/dashboard/users', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/users/users.html'));
 });
-app.get('/dashboard/apiUser', (req, res) => {
+app.get('/dashboard/apiUser', onlyCompanyAndAdmin, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/dashboard/apiUser/apiUser.html'));
 });
 
 
-app.get('/generalViews/BlogModas', (req, res) => {
+// ==== VISTAS PÚBLICAS: Visitantes/Clientes/Empresa/Admin ====
+const publicView = allowVisitors();
+
+app.get('/generalViews/BlogModas', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/BlogModas/Blog_modas.html'));
 });
-app.get('/generalViews/camisaAlfilerada', (req, res) => {
+app.get('/generalViews/camisaAlfilerada', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/camisaAlfilerada/camisaAlfilereada.html'));
 });
-app.get('/generalViews/camisaAmericana', (req, res) => {
+app.get('/generalViews/camisaAmericana', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/camisaAmericana/camisaAmericana.html'));
 });
-app.get('/generalViews/camisaPasador', (req, res) => {
+app.get('/generalViews/camisaPasador', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/camisaPasador/camisaPasador.html'));
 });
-app.get('/generalViews/camisas', (req, res) => {
+app.get('/generalViews/camisas', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/camisas/camisas.html'));
 });
-app.get('/generalViews/carritoCompras', (req, res) => {
+// Carrito y perfil requieren al menos 'Cliente'
+const onlyClientAndUp = guardView(['Cliente','Empresa','Admin']);
+app.get('/generalViews/carritoCompras', onlyClientAndUp, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/carritoCompras/carritoCompras.html'));
 });
-app.get('/generalViews/elegant', (req, res) => {
+app.get('/generalViews/elegant', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/elegant/elegant.html'));
 });
-app.get('/generalViews/home', (req, res) => {
+app.get('/generalViews/home', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
 });
-app.get('/generalViews/logeado', (req, res) => {
+app.get('/generalViews/logeado', onlyClientAndUp, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/logeado/logeado.html'));
 });
-app.get('/generalViews/login', (req, res) => {
+app.get('/generalViews/login', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/login/login.html'));
 });
-app.get('/generalViews/master', (req, res) => {
+app.get('/generalViews/master', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/master/master.html'));
 });
-app.get('/generalViews/pantalonDrill', (req, res) => {
+app.get('/generalViews/pantalonDrill', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/pantalonDrill/PantalonDrill.html'));
 });
-app.get('/generalViews/pantalones', (req, res) => {
+app.get('/generalViews/pantalones', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/pantalones/pantalones.html'));
 });
-app.get('/generalViews/pantalonGabardina', (req, res) => {
+app.get('/generalViews/pantalonGabardina', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/pantalonGabardina/pantalonGabardina.html'));
 });
-app.get('/generalViews/pantalonLino', (req, res) => {
+app.get('/generalViews/pantalonLino', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/pantalonLino/PantalonLino.html'));
 });
-app.get('/generalViews/pasarela', (req, res) => {
+app.get('/generalViews/pasarela', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/pasarela/pasarela.html'));
 });
-app.get('/generalViews/profile', (req, res) => {
+app.get('/generalViews/profile', onlyClientAndUp, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/profile/profile.html'));
 });
-app.get('/generalViews/register', (req, res) => {
+app.get('/generalViews/codige', onlyClientAndUp, (req, res) => {
+    res.sendFile(path.join(publicPath, 'views/generalViews/codige/codige.html'));
+});
+app.get('/generalViews/register', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/register/register.html'));
 });
-app.get('/generalViews/shoptop', (req, res) => {
+app.get('/generalViews/shoptop', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/shoptop/shoptop.html'));
 });
-app.get('/generalViews/torsoAbrigoFormal', (req, res) => {
+app.get('/generalViews/torsoAbrigoFormal', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/torsoAbrigoFormal/abrigoFormal.html'));
 });
-app.get('/generalViews/torsoBlazer', (req, res) => {
+app.get('/generalViews/torsoBlazer', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/torsoBlazer/blazer.html'));
 });
-app.get('/generalViews/torsoGaban', (req, res) => {
+app.get('/generalViews/torsoGaban', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/torsoGaban/gaban.html'));
 });
-app.get('/generalViews/torso', (req, res) => {
+app.get('/generalViews/torso', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/torso/torso.html'));
 });
-app.get('/generalViews/userLoged', (req, res) => {
+app.get('/generalViews/userLoged', onlyClientAndUp, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/userLoged/userLogued.html'));
 });
-app.get('/generalViews/Visitor', (req, res) => {
+app.get('/generalViews/Visitor', publicView, (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/Visitor/Visitor.html'));
 });
 
@@ -260,7 +274,21 @@ app.get('/views/generalViews/:section/:file', (req, res) => {
     res.status(404).send('Not found');
 });
 
+// Compatibilidad: enlaces antiguos tipo /views/{section}/{file}.html -> redirigir a /generalViews/{section}
+app.get('/views/:section/:file', (req, res) => {
+    const section = req.params.section;
+    // Evitar interferir con rutas específicas ya definidas (dashboard/generalViews) colocando esta ruta después de ellas
+    return res.redirect(`/generalViews/${section}`);
+});
 
+
+
+// Ruta raíz -> Home
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
+});
+
+// Middleware para manejar rutas no encontradas (404)
 app.use((req, res, next) => {
     res.status(404).json({
         message: 'Endpoint not found'

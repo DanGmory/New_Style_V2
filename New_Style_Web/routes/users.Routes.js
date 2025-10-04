@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { showUsers, showUsersId, addUsers, updateUsers, deleteUsers, loginUser } from '../controllers/users.Controller.js';
+import { showUsers, showUsersId, addUsers, updateUsers, deleteUsers, loginUser, logoutUser } from '../controllers/users.Controller.js';
 
 const router = Router();
 const apiName = '/users';
@@ -17,5 +17,8 @@ router.route(`${apiName}/:id`)
 
 // Nueva ruta para el inicio de sesión
 router.post(`${apiName}/login`, loginUser);
+
+// Ruta para cerrar sesión (elimina la cookie)
+router.post(`${apiName}/logout`, logoutUser);
 
 export default router;

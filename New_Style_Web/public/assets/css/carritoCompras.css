@@ -5,17 +5,9 @@ html {
     padding: 0;
 }
 
+/* Estilos mínimos para no romper el layout global */
 body {
     font-family: 'Arial', sans-serif;
-    width: 90%;
-    padding-left: 100px;
-    background-image: url(../../assets/imgs/Gemini_Generated_Image_fgtn5jfgtn5jfgtn.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    display: flex;
-    flex-direction: column;
 }
 
 

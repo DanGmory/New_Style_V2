@@ -217,7 +217,16 @@ export const loginUser = async (req, res) => {
             { expiresIn: "1h" }
         );
 
-        // Respuesta exitosa
+        // Establecer cookie httpOnly con el token (para que los guards de vistas puedan leerla)
+        // En desarrollo secure:false; en producción usar secure:true sobre HTTPS
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'lax',
+            secure: false,
+            maxAge: 60 * 60 * 1000 // 1 hora
+        });
+
+        // Respuesta exitosa (además de la cookie, devolvemos el token por compatibilidad con el front actual)
         res.status(200).json({
             message: "Inicio de sesión exitoso",
             token,
@@ -232,5 +241,15 @@ export const loginUser = async (req, res) => {
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
         res.status(500).json({ error: "Error al iniciar sesión", details: error.message });
+    }
+};
+
+// Cerrar sesión: limpiar cookie del token
+export const logoutUser = async (_req, res) => {
+    try {
+        res.clearCookie('token', { httpOnly: true, sameSite: 'lax', secure: false });
+        return res.status(200).json({ message: 'Sesión cerrada' });
+    } catch (error) {
+        return res.status(500).json({ error: 'No se pudo cerrar sesión', details: error.message });
     }
 };

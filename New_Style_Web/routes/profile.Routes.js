@@ -12,5 +12,4 @@ router.route(`${apiName}/:id`)
     .get(showProfileId)
     .put(updateProfile)
     .delete(deleteProfile);
- 
 export default router;

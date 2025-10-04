@@ -68,6 +68,13 @@ export const deleteRole = async (req, res) => {
             deleted: result.affectedRows
         });
     } catch (error) {
+        // Detectar error por referencia de clave foránea (MySQL errno 1451)
+        if (error?.code === 'ER_ROW_IS_REFERENCED_2' || error?.errno === 1451) {
+            return res.status(409).json({
+                error: "No se puede eliminar el rol porque está asociado a usuarios u otros registros.",
+                details: error.message
+            });
+        }
         res.status(500).json({ error: "Error deleting role", details: error.message});
     }
 };

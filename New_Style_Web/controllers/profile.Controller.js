@@ -1,208 +1,165 @@
 import { connect } from '../config/database.js';
 
-// ==============================
-// MOSTRAR TODOS LOS PERFILES
-// ==============================
 export const showProfile = async (req, res) => {
-  try {
-    const sqlQuery = `
-      SELECT
-        P.Profile_id,
-        P.Profile_name,
-        P.Profile_lastname,
-        P.Profile_phone,
-        P.Profile_number_document,
-        COALESCE(i.Image_url, '') AS Image_url,
-        COALESCE(i.Image_name, '') AS Image_name,
-        U.User_name, 
-        U.User_mail, 
-        U.User_password, 
-        TD.Type_document_name,
-        R.Role_name
-      FROM profile P
-      LEFT JOIN images i ON P.Image_fk = i.Image_id
-      LEFT JOIN users U ON P.User_fk = U.User_id
-      LEFT JOIN type_document TD ON P.Type_document_fk = TD.Type_document_id
-      LEFT JOIN role R ON U.Role_fk = R.Role_id
-    `;
-    const [result] = await connect.query(sqlQuery);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ error: "Error fetching Profile", details: error.message });
-  }
+    try {
+        const sqlQuery = `
+            SELECT 
+                p.Profile_id,
+                p.Profile_name,
+                p.Profile_lastname,
+                p.Profile_phone,
+                p.Profile_number_document,
+                p.User_fk,
+                p.image_fk,
+                p.Type_document_fk,
+                p.Address_fk,
+                COALESCE(u.User_mail, 'Sin correo') AS User_mail,
+                COALESCE(t.Type_document_name, 'Sin tipo') AS Type_document_name,
+                i.Image_url
+            FROM profile p
+            LEFT JOIN users u ON p.User_fk = u.User_id
+            LEFT JOIN type_document t ON p.Type_document_fk = t.Type_document_id
+            LEFT JOIN images i ON p.image_fk = i.Image_id
+        `;
+        const [result] = await connect.query(sqlQuery);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching profile", details: error.message });
+    }
 };
 
-// ==============================
-// MOSTRAR PERFIL POR ID
-// ==============================
 export const showProfileId = async (req, res) => {
-  try {
-    const sqlQuery = `
-      SELECT
-        P.Profile_id,
-        P.Profile_name,
-        P.Profile_lastname,
-        P.Profile_phone,
-        P.Profile_number_document,
-        COALESCE(i.Image_url, '') AS Image_url,
-        COALESCE(i.Image_name, '') AS Image_name,
-        U.User_name,
-        U.User_mail,
-        U.User_password,
-        TD.Type_document_name,
-        R.Role_name
-      FROM profile P
-      LEFT JOIN images i ON P.Image_fk = i.Image_id
-      LEFT JOIN users U ON P.User_fk = U.User_id
-      LEFT JOIN type_document TD ON P.Type_document_fk = TD.Type_document_id
-      LEFT JOIN role R ON U.Role_fk = R.Role_id
-      WHERE P.Profile_id = ?
-    `;
-    const [result] = await connect.query(sqlQuery, [req.params.id]);
-
-    if (result.length === 0) {
-      return res.status(404).json({ error: "Profile not found" });
+    try {
+        const sqlQuery = `
+            SELECT 
+                p.Profile_id,
+                p.Profile_name,
+                p.Profile_lastname,
+                p.Profile_phone,
+                p.Profile_number_document,
+                p.User_fk,
+                p.image_fk,
+                p.Type_document_fk,
+                p.Address_fk,
+                COALESCE(u.User_mail, 'Sin correo') AS User_mail,
+                COALESCE(t.Type_document_name, 'Sin tipo') AS Type_document_name,
+                i.Image_url
+            FROM profile p
+            LEFT JOIN users u ON p.User_fk = u.User_id
+            LEFT JOIN type_document t ON p.Type_document_fk = t.Type_document_id
+            LEFT JOIN images i ON p.image_fk = i.Image_id
+            WHERE p.Profile_id = ?
+        `;
+        const [result] = await connect.query(sqlQuery, [req.params.id]);
+        if (result.length === 0) return res.status(404).json({ error: "Profile not found"});
+        res.status(200).json(result[0]);
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching profile", details: error.message });
     }
-    res.status(200).json(result[0]);
-  } catch (error) {
-    console.error("SQL Error:", error);
-    res.status(500).json({ error: "Error fetching Profile", details: error.message });
-  }
 };
 
-// ==============================
-// AGREGAR PERFIL
-// ==============================
 export const addProfile = async (req, res) => {
-  try {
-    const {
-      Profile_name,
-      Profile_lastname,
-      Profile_phone,
-      Profile_number_document,
-      User_fk,
-      image_fk,
-      Type_document_fk
-    } = req.body;
-
-    if (
-      !Profile_name ||
-      !Profile_lastname ||
-      !Profile_phone ||
-      !Profile_number_document ||
-      !User_fk ||
-      !Type_document_fk
-    ) {
-      return res.status(400).json({ error: "Missing required fields" });
+    try {
+        const { Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk, image_fk, Type_document_fk, Address_fk } = req.body;
+        // Validación detallada
+        const missingFields = [];
+        if (!Profile_name || !String(Profile_name).trim()) missingFields.push('Profile_name');
+        if (!Profile_lastname || !String(Profile_lastname).trim()) missingFields.push('Profile_lastname');
+        if (!Profile_phone || !String(Profile_phone).trim()) missingFields.push('Profile_phone');
+        if (!Profile_number_document || !String(Profile_number_document).trim()) missingFields.push('Profile_number_document');
+        const userId = Number(User_fk);
+        if (!userId || Number.isNaN(userId)) missingFields.push('User_fk');
+        const typeDocId = Number(Type_document_fk);
+        if (!typeDocId || Number.isNaN(typeDocId)) missingFields.push('Type_document_fk');
+        if (missingFields.length) {
+            return res.status(400).json({ error: "Missing required fields", missingFields });
+        }
+        const imageId = image_fk != null ? Number(image_fk) : null;
+        const addressId = Address_fk != null ? Number(Address_fk) : null;
+        let sqlQuery = "INSERT INTO profile (Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk, image_fk, Type_document_fk, Address_fk) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        const [result] = await connect.query(sqlQuery, [Profile_name, Profile_lastname, Profile_phone, Profile_number_document, userId, imageId, typeDocId, addressId]);
+        res.status(201).json({
+            data: [{ id: result.insertId, Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk: userId, image_fk: imageId, Type_document_fk: typeDocId, Address_fk: addressId }],
+            status: 201
+        });
+    } catch (error) {
+        console.error('Error adding profile:', {
+            body: req.body,
+            message: error.message,
+            code: error.code,
+            sqlMessage: error.sqlMessage,
+            sqlState: error.sqlState
+        });
+        // Manejar duplicados (teléfono, doc o perfil por usuario)
+        if (error && error.code === 'ER_DUP_ENTRY') {
+            const msg = String(error.sqlMessage || error.message || '').toLowerCase();
+            let friendly = 'El valor ya está registrado';
+            if (msg.includes('profile_phone')) friendly = 'El teléfono ya está registrado';
+            else if (msg.includes('profile_number_document')) friendly = 'El número de documento ya está registrado';
+            else if (msg.includes('user_fk') || msg.includes('user') && msg.includes('unique')) friendly = 'Este usuario ya tiene un perfil';
+            return res.status(409).json({ error: friendly, details: error.sqlMessage || error.message, code: error.code });
+        }
+        res.status(500).json({ error: "Error adding profile", details: error.message, sqlMessage: error.sqlMessage, code: error.code });
     }
-
-    const sqlQuery = `
-      INSERT INTO profile
-      (Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk, image_fk, Type_document_fk)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `;
-
-    const [result] = await connect.query(sqlQuery, [
-      Profile_name,
-      Profile_lastname,
-      Profile_phone,
-      Profile_number_document,
-      User_fk,
-      image_fk ? parseInt(image_fk) : null, // <-- Aquí ahora es NULL si no hay imagen
-      Type_document_fk
-    ]);
-
-    res.status(201).json({
-      data: [{
-        id: result.insertId,
-        Profile_name,
-        Profile_lastname,
-        Profile_phone,
-        Profile_number_document,
-        User_fk,
-        image_fk: image_fk ? parseInt(image_fk) : null, // También lo reflejas en la respuesta
-        Type_document_fk
-      }],
-      status: 201
-    });
-  } catch (error) {
-    res.status(500).json({ error: "Error adding Profile", details: error.message });
-  }
 };
 
-
-// ==============================
-// ACTUALIZAR PERFIL
-// ==============================
 export const updateProfile = async (req, res) => {
-  try {
-    const {
-      Profile_name,
-      Profile_lastname,
-      Profile_phone,
-      Profile_number_document,
-      User_fk,
-      image_fk,
-      Type_document_fk
-    } = req.body;
-
-    const sqlQuery = `
-      UPDATE profile
-      SET Profile_name = ?, Profile_lastname = ?, Profile_phone = ?, Profile_number_document = ?, User_fk = ?, image_fk = ?, Type_document_fk = ?
-      WHERE Profile_id = ?
-    `;
-
-    const [result] = await connect.query(sqlQuery, [
-      Profile_name,
-      Profile_lastname,
-      Profile_phone,
-      Profile_number_document,
-      User_fk,
-      image_fk,
-      Type_document_fk,
-      req.params.id
-    ]);
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Profile not found" });
+    try {
+        const { Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk, image_fk, Type_document_fk, Address_fk } = req.body;
+        const missingFields = [];
+        if (!Profile_name || !String(Profile_name).trim()) missingFields.push('Profile_name');
+        if (!Profile_lastname || !String(Profile_lastname).trim()) missingFields.push('Profile_lastname');
+        if (!Profile_phone || !String(Profile_phone).trim()) missingFields.push('Profile_phone');
+        if (!Profile_number_document || !String(Profile_number_document).trim()) missingFields.push('Profile_number_document');
+        const userId = Number(User_fk);
+        if (!userId || Number.isNaN(userId)) missingFields.push('User_fk');
+        const typeDocId = Number(Type_document_fk);
+        if (!typeDocId || Number.isNaN(typeDocId)) missingFields.push('Type_document_fk');
+        if (missingFields.length) {
+            return res.status(400).json({ error: "Missing required fields", missingFields });
+        }
+        const imageId = image_fk != null ? Number(image_fk) : null;
+        const addressId = Address_fk != null ? Number(Address_fk) : null;
+        let sqlQuery = "UPDATE profile SET Profile_name=?, Profile_lastname=?, Profile_phone=?, Profile_number_document=?, User_fk=?, image_fk=?, Type_document_fk=?, Address_fk=? WHERE Profile_id=?";
+        const [result] = await connect.query(sqlQuery, [Profile_name, Profile_lastname, Profile_phone, Profile_number_document, userId, imageId, typeDocId, addressId, req.params.id]);
+        if (result.affectedRows === 0) return res.status(404).json({ error: "Profile not found"});
+        res.status(200).json({
+            data: [{ Profile_name, Profile_lastname, Profile_phone, Profile_number_document, User_fk: userId, image_fk: imageId, Type_document_fk: typeDocId, Address_fk: addressId }],
+            status: 200,
+            updated: result.affectedRows
+        });
+    } catch (error) {
+        console.error('Error updating profile:', {
+            params: req.params,
+            body: req.body,
+            message: error.message,
+            code: error.code,
+            sqlMessage: error.sqlMessage,
+            sqlState: error.sqlState
+        });
+        if (error && error.code === 'ER_DUP_ENTRY') {
+            const msg = String(error.sqlMessage || error.message || '').toLowerCase();
+            let friendly = 'El valor ya está registrado';
+            if (msg.includes('profile_phone')) friendly = 'El teléfono ya está registrado';
+            else if (msg.includes('profile_number_document')) friendly = 'El número de documento ya está registrado';
+            else if (msg.includes('user_fk') || msg.includes('user') && msg.includes('unique')) friendly = 'Este usuario ya tiene un perfil';
+            return res.status(409).json({ error: friendly, details: error.sqlMessage || error.message, code: error.code });
+        }
+        res.status(500).json({ error: "Error updating profile", details: error.message, sqlMessage: error.sqlMessage, code: error.code });
     }
-
-    res.status(200).json({
-      data: [{
-        Profile_name,
-        Profile_lastname,
-        Profile_phone,
-        Profile_number_document,
-        User_fk,
-        image_fk,
-        Type_document_fk
-      }],
-      status: 200,
-      updated: result.affectedRows
-    });
-  } catch (error) {
-    res.status(500).json({ error: "Error updating Profile", details: error.message });
-  }
 };
 
-// ==============================
-// ELIMINAR PERFIL
-// ==============================
 export const deleteProfile = async (req, res) => {
-  try {
-    const sqlQuery = "DELETE FROM profile WHERE Profile_id = ?";
-    const [result] = await connect.query(sqlQuery, [req.params.id]);
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Profile not found" });
+    try {
+        let sqlQuery = "DELETE FROM profile WHERE Profile_id = ?";
+        const [result] = await connect.query(sqlQuery, [req.params.id]);
+        if (result.affectedRows === 0) return res.status(404).json({ error: "Profile not found" });
+        res.status(200).json({
+            data: [],
+            status: 200,
+            deleted: result.affectedRows
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting profile", details: error.message });
     }
-
-    res.status(200).json({
-      data: [],
-      status: 200,
-      deleted: result.affectedRows
-    });
-  } catch (error) {
-    res.status(500).json({ error: "Error deleting Profile", details: error.message });
-  }
 };
