@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camisas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../../assets/css/premium-shared.css">
+    <link rel="stylesheet" href="../../../assets/css/camisas.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black p-5">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/generalViews/home">
+            <img src="../../../assets/imgs/logo.jpg" alt="Logo" width="100" height="100" class="d-inline-block align-text-top" />
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  PRODUCTOS
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/generalViews/torso">TORSO</a></li>
+                  <hr />
+                  <li><a class="dropdown-item" href="/generalViews/pantalones">PANTALONES</a></li>
+                </ul>
+              </li>
+      
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  MARCAS
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/generalViews/master">MASTER</a></li>
+                  <hr />
+                  <li><a class="dropdown-item" href="/generalViews/shoptop">SHOPTOP</a></li>
+                  <hr />
+                  <li><a class="dropdown-item" href="/generalViews/elegant">ELEGANT</a></li>
+                </ul>
+              </li>
+      
+              <li class="nav-item">
+                <a class="nav-link active" href="/generalViews/BlogModas">BLOG DE MODAS</a>
+              </li>
+            </ul>
+      
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <!-- Lupa -->
+              <li class="nav-item">
+                <a class="nav-link" id="searchIcon">
+                  <img src="../../../assets/imgs/lupa.png" alt="lupa" width="50" height="50" style="cursor: pointer" />
+                </a>
+              </li>
+      
+              <!-- Formulario de búsqueda oculto inicialmente -->
+              <li class="nav-item align-self-center" id="searchFormContainer" style="display: none">
+                <form class="d-flex align-self-center" role="search" style="margin-right: 10px">
+                  <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+                </form>
+              </li>
+      
+              <!-- Carrito -->
+              <li class="nav-item">
+                <a href="/generalViews/carritoCompras" class="nav-link">
+                  <img src="../../../assets/imgs/carrito.png" alt="Carrito" width="50" height="50" />
+                </a>
+              </li>
+      
+             <li class="nav-item dropdown">
+               <a href="#" class="nav-link d-flex dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                 <img src="../../../assets/imgs/Login 3.png" alt="Perfil" width="50" height="50" />
+               </a>
+               <ul class="dropdown-menu" id="sessionMenu">
+                 <li>
+                   <a class="dropdown-item" href="/generalViews/profile" data-role="profile" style="display: none;">PERFIL</a>
+                 </li>
+                 <li>
+                   <a class="dropdown-item" href="/generalViews/register" data-role="register">REGISTRO</a>
+                 </li>
+                 <li><hr class="dropdown-divider" /></li>
+                 <li>
+                   <a class="dropdown-item" href="/generalViews/login" data-role="login">LOGIN</a>
+                 </li>
+               </ul>
+             </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+
+      <div class="container-fluid mt-4">
+  <div class="row justify-content-center text-center">
+
+    <!-- Camisa Alfilerada -->
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        <a href="/generalViews/camisaAlfilerada">
+          <img 
+            src="../../../assets/imgs/Camisa_alfilereado_3.webp" 
+            class="card-img-top vertical-rectangular" 
+            alt="Imagen Pantalon">
+        </a>
+        <div class="card-body">
+          <p class="card-text fw-bold">Camisa Alfilerada</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camisa Americana -->
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        <a href="/generalViews/camisaAmericana">
+          <img 
+            src="../../../assets/imgs/Camisa_americana_2.webp" 
+            class="card-img-top vertical-rectangular" 
+            alt="Imagen Pantalones">
+        </a>
+        <div class="card-body">
+          <p class="card-text fw-bold">Camisa Americana</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Camisa Pasador -->
+    <div class="col-12 col-md-6 col-lg-3 mb-4">
+      <div class="card">
+        <a href="/generalViews/camisaPasador">
+          <img 
+            src="../../../assets/imgs/Camisa_pasador_3.webp" class="card-img-top vertical-rectangular" alt="Imagen Pantalones">
+        </a>
+        <div class="card-body">
+          <p class="card-text fw-bold">Camisa Pasador</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Puedes agregar más productos aquí si lo necesitas -->
+
+  </div>
+</div>
+
+
+        <!-- Footer -->
+        <div class="container-fluid navbar-expand-lg p-5 bg-black text-white">
+            <div class="row">
+                <div class="col img-tiktok-col">
+                <div class="logoF ">
+                    <img src="../../../assets/imgs/logo.jpg" alt=""class="logo2   float-start">
+                </div>
+                <div class="text">
+                    <h4 class="text-center" >¡SIGUENOS EN NUESTRAS REDES SOCIALES!</h4>  
+                </div>
+                </div>
+                <div class="col  img-tiktok-col">
+                <div>
+                    <div class="img-tiktok">
+                        <img src="../../../assets/imgs/Tik_tok_logo-removebg-preview.png" alt="TikTok Logo" class="img-fluid mb-3" style="max-width: 50px; height: auto;">
+                    </div>
+                    <div class="img-tiktok">
+                        <img src="../../../assets/imgs/Instagram_logo-removebg-preview.png" alt="Instagram Logo" class="img-fluid mb-3" style="max-width: 50px; height: auto;">
+                    </div>
+                    <div class="img-tiktok">
+                        <img src="../../../assets/imgs/Youtube_portada-removebg-preview.png" alt="YouTube Logo" class="img-fluid" style="max-width: 50px; height: auto;">
+                    </div>
+                </div>
+                </div>  
+                <div class="col-md-4 text-center d-flex flex-column align-items-center justify-content-center">
+                <h3 class="mb-3 text-justify">CALIDAD & SEGURIDAD</h3>  
+                <p>Copyright © 2024, New Style.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+    <script src="../../../assets/js/generalViews/loginUser.js"></script>
+   <!--- <script src="../../../assets/js/generalViews/session.js"></script>/    se comento para que redirija  a login--->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</html>
