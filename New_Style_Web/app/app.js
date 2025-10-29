@@ -287,11 +287,9 @@ app.get('/views/:section/:file', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
 });
+
 // Middleware para manejar rutas no encontradas (404)
 app.use((req, res, next) => {
-// Ruta raíz -> Home
-app.get('/', (req, res) => {
-    res.sendFile(path.join(publicPath, 'views/generalViews/home/home.html'));
     res.status(404).json({
         message: 'Endpoint not found'
     });
