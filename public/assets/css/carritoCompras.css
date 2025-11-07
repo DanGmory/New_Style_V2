@@ -37,6 +37,42 @@ img {
     background-color: #f1f1f1;
 }
 
+.dropdown-menu{
+      width: auto; 
+      background-color: #000000;
+      min-width: 10px !important;
+      text-align: center !important;
+      border: tran;
+      border-radius: 5px; 
+    }
+
+
+     .dropdown-item{
+      font-size: 0.8rem; 
+      padding: 0.25rem 1rem; 
+      text-decoration: none;
+      color: rgb(255, 255, 255) !important;
+      background-color: transparent !important;
+      border-radius: 10px; 
+    }
+    
+    
+ /**/
+    .nav-item{
+      padding-right: 50px;
+      font-size: 18px;
+    }
+    
+    
+
+
+.dropdown-item:hover {
+  background: linear-gradient(90deg, rgba(201,170,113,0.2), rgba(244,228,193,0.2)) !important;
+  color: #c9aa71 !important;
+  transform: translateX(5px);
+}
+
+
 /* Sección del carrito */
 .card {
     border: none;
