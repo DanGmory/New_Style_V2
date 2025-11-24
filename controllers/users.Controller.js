@@ -74,11 +74,31 @@ export const addUsers = async (req, res) => {
             return res.status(400).json({ error: "Missing required fields" });
         }
 
-        // Hashear la contraseña
+        //  Validación correo NO repetido
+        const [emailExists] = await connect.query(
+            "SELECT User_id FROM users WHERE User_mail = ?",
+            [User_mail]
+        );
+
+        if (emailExists.length > 0) {
+            return res.status(409).json({ error: "El correo ya está registrado" });
+        }
+
+       // Validación nombre de usuario NO repetido
+        const [nameExists] = await connect.query(
+            "SELECT User_id FROM users WHERE User_name = ?",
+            [User_name]
+        );
+
+        if (nameExists.length > 0) {
+            return res.status(409).json({ error: "El nombre de usuario ya está registrado" });
+        }
+
+        //  Hashear la contraseña
         const trimmedPassword = User_password.trim();
         const hashedPassword = await bcrypt.hash(trimmedPassword, 10);
 
-        // Insertar usuario con rol y estado fijo
+        //  Insertar usuario con rol y estado fijo
         const sqlQuery = `
             INSERT INTO users (User_name, User_mail, User_password, Role_fk, State_user_fk)
             VALUES (?, ?, ?, ?, ?)
@@ -108,6 +128,8 @@ export const addUsers = async (req, res) => {
         res.status(500).json({ error: "Error registrando usuario", details: error.message });
     }
 };
+
+
 
 // Función para actualizar un usuario existente
 export const updateUsers = async (req, res) => {

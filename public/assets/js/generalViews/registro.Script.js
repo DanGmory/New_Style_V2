@@ -13,21 +13,48 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     try {
-      const response = await fetch( HOST + URL_USERS, {
+      const response = await fetch(HOST + URL_USERS, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData)
       });
 
-      if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Error ${response.status}: ${text}`);
+      // 🔹 Manejo especial del 409 para mostrar mensaje limpio
+      if (response.status === 409) {
+        const error = await response.json();
+        showMiniModal(error.error);   // <-- Sin "Error 409"
+        return;
       }
 
-      const result = await response.json();
-      alert('Usuario registrado con ID: ' + result.data.id);
+      // 🔹 Cualquier otro error
+      if (!response.ok) {
+        showMiniModal("Ocurrió un error inesperado");
+        return;
+      }
+
+      // 🔹 Si todo OK
+     const result = await response.json();
+      showMiniModal('✔ Registro exitoso');
+
+
     } catch (error) {
-      alert(error.message);
+      showMiniModal("Error de conexión con el servidor");
     }
+
   });
+
+  function showMiniModal(message) {
+  const miniModal = document.getElementById("miniModal");
+  const messageEl = document.getElementById("miniModalMessage");
+
+  messageEl.textContent = message;
+  miniModal.style.display = "block";
+
+  // Ocultar a los 3 segundos
+  setTimeout(() => {
+    miniModal.style.display = "none";
+  }, 3000);
+}
+
+
 });

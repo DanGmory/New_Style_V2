@@ -11,19 +11,30 @@
 </head>
 <body class="d-flex flex-column min-vh-100 auth-page">
 
+    <!-- MINI MODAL -->
+  <div id="miniModal">
+    <p id="miniModalMessage"></p>
+  </div>
+
+
   <!-- CONTENEDOR DEL FORMULARIO -->
   <div class="container d-flex justify-content-center align-items-center flex-grow-1">
+
+
     <div class="row justify-content-center w-100">
       <div class="col-md-6 col-lg-5">
         <form id="register-form" class="p-4 auth-card">
+           
+
           <!-- Título responsivo -->
           <h1 class="text-center mb-4 auth-title">Crear cuenta</h1>
         
-          <!-- Campo de Nombre -->
+     <!-- Campo de Nombre -->
           <div class="mb-3">
-            <input type="text" id="userName" class="form-control" name="username" placeholder="Nombre" required autocomplete="name" autofocus>
+            <input type="text" id="userName" class="form-control" name="username" placeholder="Nombre" required autocomplete="name" autofocuspattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+"
+             oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ0-9 ]/g, '');">
           </div>
-        
+
           <!-- Campo de Correo -->
           <div class="mb-3">
             <input type="email" id="userEmail" class="form-control" name="useremail" placeholder="Correo electrónico" required autocomplete="email">
@@ -43,6 +54,8 @@
       </div>
     </div>
   </div>
+
+  
 
   <!-- FOOTER CON LOGOS Y TEXTO -->
   <footer class="mt-auto text-white pt-4 pb-3 auth-footer">

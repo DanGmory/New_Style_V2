@@ -98,3 +98,48 @@ footer.auth-footer{
   background: rgba(0,0,0,.7);
   border-top: 1px solid rgba(255,255,255,.08);
 }
+
+
+
+
+#miniModal {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #57410a, #0e0d0d);
+  color: white;
+  padding: 14px 25px;
+  border-radius: 12px;
+  font-size: 15px;
+  display: none;
+  text-align: center;
+  z-index: 99999;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -10px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
+#userName{
+   background: linear-gradient(135deg, #2e2204, #0e0d0d);
+  color: white;
+  padding: 14px 25px;
+}
+
+#userEmail{
+   background: linear-gradient(135deg, #2e2204, #0e0d0d);
+  color: white;
+  padding: 14px 25px;
+}
+
+
+#userPassword{
+   background: linear-gradient(135deg, #2e2204, #0e0d0d);
+  color: white;
+  padding: 14px 25px;
+}
