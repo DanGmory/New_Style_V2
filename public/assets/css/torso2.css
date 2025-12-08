@@ -110,3 +110,8 @@ margin-left:   70px;
     object-fit: cover;
     object-position: center;
   }
+
+  #sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}

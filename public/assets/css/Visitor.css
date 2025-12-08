@@ -456,3 +456,8 @@
       font-size: 1rem;
     }
   }
+
+  #sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}

@@ -16,12 +16,13 @@ try {
         US.User_mail AS user_mail,
         CP.Company_name AS company_name
     FROM codige CO
-    INNER JOIN orders O ON CO.Orders_fk = O.Orders_id
-    INNER JOIN product PD ON O.Product_fk = PD.Product_id
-    INNER JOIN users US ON O.User_fk = US.User_id
-    INNER JOIN company CP ON US.Company_fk = CP.Company_id
+        LEFT JOIN orders O ON CO.Orders_fk = O.Orders_id
+        LEFT JOIN product PD ON O.Product_fk = PD.Product_id
+        LEFT JOIN users US ON O.User_fk = US.User_id
+        LEFT JOIN company CP ON US.Company_fk = CP.Company_id
     `;
     const [result] = await connect.query(sqlQuery);
+    console.log('Resultado SQL showCodige:', result);
     res.status(200).json(result);
 } catch (error) {
     res.status(500).json({ error: "Error fetching codige", details: error.message });

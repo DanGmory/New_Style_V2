@@ -26,16 +26,17 @@
       const res = await fetch(HOST + URL_CODIGE);
       if (!res.ok) throw new Error('No se pudo cargar la lista');
       let list = await res.json();
+      console.log('Lista original de códigos:', list);
 
-      // Si hay usuario logueado en localStorage, filtra por nombre de usuario o email si existiera
+      // Filtra por email guardado en localStorage (más seguro y único)
       try {
-        const userInfo = JSON.parse(localStorage.getItem('userLoggedNewStyle') || 'null');
-        const mail = userInfo?.email || userInfo?.User_mail || null;
-        const name = userInfo?.name || userInfo?.User_name || null;
-        if (name) {
-          list = list.filter(x => (x.user_name || '').toLowerCase() === String(name).toLowerCase());
+        const mail = localStorage.getItem('currentUserEmail');
+        if (mail) {
+          const filtered = list.filter(x => (x.user_mail || '').toLowerCase() === mail.toLowerCase());
+          console.log('Email usado para filtrar:', mail);
+          console.log('Lista filtrada:', filtered);
+          list = filtered;
         }
-        // Si en tu backend se expone el correo del usuario en esta lista, podrías filtrar por mail también.
       } catch {}
 
       lastData = Array.isArray(list) ? list : [];

@@ -108,3 +108,9 @@ main {
   color: #c9aa71 !important;
   transform: translateX(5px);
 }
+
+
+#sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}

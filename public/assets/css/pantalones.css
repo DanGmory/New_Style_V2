@@ -76,6 +76,11 @@ margin-left:   70px;
     
     
 
+    #sessionMenu {
+  left: unset !important;
+  right: 0 !important; 
+}
+
 
 .dropdown-item:hover {
   background: linear-gradient(90deg, rgba(201,170,113,0.2), rgba(244,228,193,0.2)) !important;

@@ -95,6 +95,7 @@ h1, h2, h3, h4, h5, h6,
       text-align: center !important;
       border: tran;
       border-radius: 5px; 
+      margin-left: 5px;
     }
 
 
@@ -114,7 +115,10 @@ h1, h2, h3, h4, h5, h6,
       font-size: 18px;
     }
     
-    
+#sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}
 
 
 .dropdown-item:hover {
@@ -388,6 +392,7 @@ footer p { color: #b0b0b0; font-size: 0.9rem; }
   .nav-item{
     padding-right: 50px;
     font-size: 18px;
+    margin-right: 20px;
   
   }
   /*Aparatado botones responsiv */

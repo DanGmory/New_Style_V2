@@ -84,6 +84,11 @@
       font-size: 18px;
     }
     
+
+    #sessionMenu {
+  left: unset !important;
+  right: 15px !important; 
+}
     
 
 

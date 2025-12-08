@@ -298,3 +298,9 @@ body {
 .formulario-tarjeta .btn-enviar:hover {
 	background: #1850b1;
 }
+
+
+#sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}

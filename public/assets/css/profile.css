@@ -104,3 +104,8 @@ body.profile-page{
 @media (max-width: 768px){
     .profile-container{ padding-top: 1.25rem; padding-bottom: 1.25rem; }
 }
+
+#sessionMenu {
+  left: unset !important;
+  right: 20px !important; 
+}
