@@ -36,6 +36,7 @@ function createCard(product) {
   : rawPrice.toLocaleString("es-CO", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
 
+
   // URL por defecto
   let href = "#";
   if (category.toLowerCase() === "torso" && type.toLowerCase() === "blazer") {
