@@ -33,7 +33,10 @@
         : "SIN TIPO";
     const amount = product.Product_amount || 0;
     const rawPrice = parseFloat(product.price || product.Product_amount || 0);
-    const price = isNaN(rawPrice) ? 0 : rawPrice.toFixed(2);
+    const price = isNaN(rawPrice)
+    ? "0"
+    : rawPrice.toLocaleString("es-CO", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
 
     // URL por defecto
     let href = "#";
