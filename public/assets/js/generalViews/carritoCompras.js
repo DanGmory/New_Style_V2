@@ -15,6 +15,14 @@
 
   const IVA_RATE = 0.19; // 19%
 
+  function formatCOP(num) {
+  return Number(num || 0).toLocaleString("es-CO", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  });
+}
+
+
   function getCurrentUserEmail(){
     try { return localStorage.getItem('currentUserEmail') || localStorage.getItem('User_mail') || null; } catch { return null; }
   }
@@ -55,7 +63,7 @@
             <button class="btn btn-sm btn-outline-secondary btn-dec" data-index="${idx}">-</button>
             <span class="px-2">${qty}</span>
             <button class="btn btn-sm btn-outline-secondary btn-inc" data-index="${idx}">+</button>
-            <span class="ms-auto fw-semibold">$${line.toFixed(2)}</span>
+            <span class="ms-auto fw-semibold">$${formatCOP(line)}</span>
           </div>
         </div>
         <button class="btn btn-sm btn-outline-danger ms-3 btn-del" data-index="${idx}"><i class="fas fa-trash"></i></button>
@@ -65,9 +73,9 @@
 
     const iva = subtotal * IVA_RATE;
     const total = subtotal + iva;
-    subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-    ivaEl.textContent = `$${iva.toFixed(2)}`;
-    totalEl.textContent = `$${total.toFixed(2)}`;
+    subtotalEl.textContent = `$${formatCOP(subtotal)}`;
+    ivaEl.textContent = `$${formatCOP(iva)}`;
+    totalEl.textContent = `$${formatCOP(total)}`;
     cartCountText.textContent = `Tienes ${items.length} producto${items.length === 1 ? '' : 's'} actualmente`;
   }
 
@@ -214,7 +222,7 @@
         const price = parseFloat(itemsByIdx[idx]?.precio || 0);
         const qty = parseInt(itemsByIdx[idx]?.cantidad || 1, 10);
         const lineTotal = (Number.isFinite(price) ? price : 0) * (Number.isFinite(qty) ? qty : 1);
-        const priceTxt = lineTotal > 0 ? ` - $${lineTotal.toFixed(2)}` : '';
+        const priceTxt = lineTotal > 0 ? ` - $${formatCOP(lineTotal)}` : '';
         return { code, priceTxt };
       });
 
@@ -239,7 +247,7 @@
       </head><body>
         <h2>Códigos de Compra</h2>
         <ul>${lines.map(l => `<li>${l.code}${l.priceTxt}</li>`).join('')}</ul>
-        <div class="total">Total: $${Number.isFinite(total) ? total.toFixed(2) : '0.00'}</div>
+        <div class="total">Total: $${formatCOP(total)}</div>
         <script>window.onload = () => { window.print(); }<\/script>
       </body></html>`;
       const w = window.open('', '_blank');
