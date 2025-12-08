@@ -1,4 +1,4 @@
-import appBcrypt from 'bcrypt';
+import appBcrypt from 'bcryptjs';
 const saltRounds = 10;
 
 

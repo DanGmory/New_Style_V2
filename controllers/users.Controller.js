@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { connect } from '../config/database.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 // Función auxiliar para verificar si un Role_id existe
 async function validateRole(roleId) {

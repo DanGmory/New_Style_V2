@@ -1,4 +1,4 @@
-import cors from "cors"; // 🔹 Importar CORS
+import cors from "cors";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
