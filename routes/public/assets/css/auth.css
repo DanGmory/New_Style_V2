@@ -1,0 +1,100 @@
+/* Estilos compartidos para Login y Registro */
+:root{
+  --auth-bg-overlay: rgba(0,0,0,.45);
+  --auth-card-bg: rgba(20,20,22,.65);
+  --auth-card-border: rgba(255,255,255,.12);
+  --auth-focus: #c9a86a; /* dorado suave */
+  --auth-text: #f5f5f5;
+  --auth-muted: #b7b7b7;
+}
+
+/* Fondo con imagen + overlay */
+body.auth-page{
+  position: relative;
+  background: #0f0f10 url('../imgs/hombre-ldnoi-10-a.jpg') center/cover no-repeat fixed;
+  color: var(--auth-text);
+  min-height: 100vh;
+}
+body.auth-page::before{
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.75)) , var(--auth-bg-overlay);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Contenedor del form - el HTML ya centra con utilidades Bootstrap */
+.auth-card{
+  position: relative;
+  z-index: 1;
+  background: var(--auth-card-bg) !important;
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border: 1px solid var(--auth-card-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.auth-card .auth-title{
+  font-family: 'Playfair Display', serif;
+  letter-spacing: .5px;
+}
+
+/* Inputs */
+.auth-card .form-control{
+  height: 48px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: var(--auth-text);
+}
+.auth-card .form-control::placeholder{
+  color: var(--auth-muted);
+}
+.auth-card .form-control:focus{
+  border-color: var(--auth-focus);
+  box-shadow: 0 0 0 .2rem rgba(201,168,106,.25);
+  background: rgba(255,255,255,.08);
+  color: var(--auth-text);
+}
+
+/* Botones */
+.custom-btn{
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: linear-gradient(135deg, #2a2a2e, #3a2f25);
+  color: #fff !important;
+  transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+}
+.custom-btn:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+.custom-btn:focus{
+  outline: none !important;
+  box-shadow: 0 0 0 .2rem rgba(201,168,106,.25) !important;
+}
+
+/* Variante ghost (links de acción alterna) */
+.custom-btn-ghost{
+  background: transparent;
+  color: var(--auth-text) !important;
+  border: 1px solid rgba(255,255,255,.22);
+}
+.custom-btn-ghost:hover{
+  background: rgba(255,255,255,.05);
+}
+
+/* Mensajes y utilidades */
+.auth-muted{ color: var(--auth-muted); }
+#error-message{ color: #ff6b6b; }
+
+/* Footer ajustado para no tapar contenido */
+footer.auth-footer{
+  background: rgba(0,0,0,.7);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
