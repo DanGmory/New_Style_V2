@@ -1,4 +1,4 @@
-const HOST = "http://localhost:3000";
+const HOST = "http://192.168.1.14:3000";
 const URL_ADDRESS = "/api_v1/address";
 const URL_ADDRESS_PROFILE = "/api_v1/addressProfile";
 const URL_API_USER = "/api_v1/apiUser";

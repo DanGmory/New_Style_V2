@@ -26,5 +26,5 @@ app.get('/generalViews/login', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en http://192.168.1.14:${PORT}`);
 });
